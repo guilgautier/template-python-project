@@ -31,7 +31,7 @@ jobs:
       #       check-out repo and set-up python
       #----------------------------------------------
       - name: Get Python
-      - uses: actions/setup-python@v2
+        uses: actions/setup-python@v2
 
       #----------------------------------------------
       #  -----  install & configure poetry  -----
