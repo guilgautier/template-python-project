@@ -1,0 +1,76 @@
+[tool.poetry] # https://python-poetry.org/docs/pyproject/
+name = "packagename"
+version = "0.1.0"
+description = "Python project boilerplate"
+license = "MIT"
+authors = ["Guillaume Gautier <guillaume.gga@gmail.com>"]
+maintainers = ["Guillaume Gautier <guillaume.gga@gmail.com>"]
+readme = "README.md" # path to README file (.md or .rst)
+homepage = "https://github.com/guilgautier/packagename" # url
+repository = "https://github.com/guilgautier/packagename" # url
+documentation = "https://github.com/guilgautier/packagename" # url
+keywords = [] # ["optimization", "gradrient descent"] at most 5 keywords
+classifiers = [
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Mathematics",
+] # https://pypi.org/classifiers/
+packages = []
+
+[tool.poetry.dependencies]
+# These packages are mandatory and form the core of this package’s distribution.
+python = ">=3.8,<3.10"
+numpy = "^1.20.2"
+scipy = "^1.6.2"
+matplotlib = "^3.4.1"
+
+# Jupyter notebooks
+jupyter = { version = "^1.0.0", optional = true }
+ipykernel = { version = "^5.5.3", optional = true }
+# Add extensions to Jupyter https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/index.html
+jupyter-contrib-nbextensions = { version = "^0.5.1", optional = true }
+jupyter_nbextensions_configurator = { version = "^0.4.1", optional = true }
+
+# Documentation
+Sphinx = { version = "^4.0.3", optional = true }
+# Sphinx extensions https://www.sphinx-doc.org/en/master/usage/extensions/index.html
+# Live reload of the .rst documentation files https://github.com/executablebooks/sphinx-autobuild
+# sphinx-autobuild docs docs/_build/html
+sphinx-autobuild = { version = "^2021.3.14", optional = true }
+# Manage bibliography .bib files
+# https://github.com/mcmtroffaes/sphinxcontrib-bibtex
+sphinxcontrib-bibtex = { version = "^2.3.0", optional = true }
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.3"
+pytest-cov = "^2.11.1"
+
+black = "^21.5b2"   # code formatter
+rstcheck = "^3.3.1" # used with
+
+# A list of all of the optional dependencies, some of which are included in the
+# below `extras`. They can be opted into by apps.
+[tool.poetry.extras]
+# poetry install -E notebook -E docs
+notebook = [
+    "jupyter",
+    "ipykernel",
+    "jupyter-contrib-nbextensions",      # https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/install.html
+    "jupyter_nbextensions_configurator",
+]
+# Documentation is generated with Sphinx
+# https://www.sphinx-doc.org/en/master/index.html
+docs = ["Sphinx", "sphinx-autobuild", "sphinxcontrib-bibtex"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+# poetry run pytest
+minversion = "6.0"
+addopts = "-ra -q -vv --cov=packagename"
+testpaths = ["tests"]
