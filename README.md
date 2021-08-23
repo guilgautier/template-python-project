@@ -4,6 +4,7 @@
   - [Development environment](#development-environment)
   - [Dependency management](#dependency-management)
   - [Installation](#installation)
+  - [Documentation](#documentation)
   - [Miscellaneous](#miscellaneous)
 
 This repository may serve as a template for scientific projects written in [Python](https://www.python.org/).
@@ -109,6 +110,22 @@ To install the package from source and potentially contribute to it
     pip install .  # install package with main (non-optional) dependencies (see pyproject.toml)
     # dev dependencies are not installed
     # pip install ".[docs, notebook]"  # install extra documentation and jupyter notebook dependencies (see pyproject.toml)
+  ```
+
+## Documentation
+
+[Sphinx](https://www.sphinx-doc.org/en/master/index.html) is recommended to generate the project's documentation.
+
+The source files of the documentation are simply  `.rst` (reStructuredText) or `.md` (Markdown) files.
+However we suggest using reST markup to keep the same syntax and format as used for [Python docstings](https://devguide.python.org/documenting/).
+
+Sphinx is in charge of building the documentation and generates HTML output in the `docs/_buil`
+Note: Sphinx can also be set up to generate a PDF using LaTeX.
+
+- Install `docs` extras dependencies, see `tool.poetry.extras` in [`pyproject.toml`](pyproject.toml)
+
+  ```bash
+    poetry install -E docs
   ```
 
 ## Miscellaneous
