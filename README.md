@@ -5,6 +5,7 @@
   - [Dependency management](#dependency-management)
   - [Installation](#installation)
   - [Documentation](#documentation)
+  - [Packaging and publishing](#packaging-and-publishing)
   - [Miscellaneous](#miscellaneous)
 
 This repository may serve as a template for scientific projects written in [Python](https://www.python.org/).
@@ -127,6 +128,36 @@ Note: Sphinx can also be set up to generate a PDF using LaTeX.
   ```bash
     poetry install -E docs
   ```
+
+## Packaging and publishing
+
+[Poetry](https://python-poetry.org/) is also of great help to simplify the packaging process
+
+- build your package
+
+  ```bash
+    poetry build
+  ```
+
+- publish your package on a Package Index (PI)
+
+  - [PyPI](https://pypi.org/) (default), see [Poetry documentation](https://python-poetry.org/docs/repositories/#configuring-credentials)
+
+    ```bash
+      poetry config pypi-token.pypi MY_TOKEN
+      poetry publish -r testpypi
+    ```
+
+  - [TestPyPI](https://test.pypi.org/) it is good practice to first publish on TestPyPI and check the results before publishing on the official PyPI
+
+    - [Poetry documentation](https://python-poetry.org/docs/repositories/#adding-a-repository)
+    - <https://test.pypi.org/help/#apitoken>
+
+    ```bash
+      poetry config repositories.testpypi https://test.pypi.org/legacy/
+      poetry config http-basic.testpypi __token__ MY_TOKEN
+      poetry publish -r testpypi
+    ```
 
 ## Miscellaneous
 
