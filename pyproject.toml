@@ -22,7 +22,8 @@ packages = []
 
 [tool.poetry.dependencies]
 # These packages are mandatory and form the core of this package’s distribution.
-python = ">=3.8,<3.10"
+python = ">=3.8,<3.10" # <3.10 required by scipy
+
 numpy = "^1.20.2"
 scipy = "^1.6.2"
 matplotlib = "^3.4.1"
@@ -43,13 +44,14 @@ sphinx-autobuild = { version = "^2021.3.14", optional = true }
 # Manage bibliography .bib files
 # https://github.com/mcmtroffaes/sphinxcontrib-bibtex
 sphinxcontrib-bibtex = { version = "^2.3.0", optional = true }
+# Checks syntax of reStructuredText and code blocks nested within it https://github.com/myint/rstcheck
+rstcheck = { version = "^3.3.1", optional = true }
 
 [tool.poetry.dev-dependencies]
-pytest = "^6.2.3"
-pytest-cov = "^2.11.1"
+pytest = "^6.2.3"      # used to run the test suite of the package
+pytest-cov = "^2.11.1" # used to generate coverage report to be uploaded on Codecov for example, see --cov and cov-report in tool.pytest.ini_options
 
-black = "^21.5b2"   # code formatter
-rstcheck = "^3.3.1" # used with
+black = "^21.5b2" # Python "uncompromising" code formatter https://github.com/psf/black
 
 # A list of all of the optional dependencies, some of which are included in the
 # below `extras`. They can be opted into by apps.
@@ -63,14 +65,15 @@ notebook = [
 ]
 # Documentation is generated with Sphinx
 # https://www.sphinx-doc.org/en/master/index.html
-docs = ["Sphinx", "sphinx-autobuild", "sphinxcontrib-bibtex"]
+docs = ["Sphinx", "sphinx-autobuild", "sphinxcontrib-bibtex", "rstcheck"]
 
 [build-system]
+# poetry build
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
 # poetry run pytest
 minversion = "6.0"
-addopts = "-ra -q -vv --cov=packagename"
+addopts = "-ra -q -vv --cov=packagename --cov-report=xml"
 testpaths = ["tests"]
