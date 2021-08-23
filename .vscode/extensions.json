@@ -1,0 +1,37 @@
+// An opinionated list of VS Code snippets used by Guillaume Gautier guilgautier https://guilgautier.github.io/
+"recommendations": [
+    // General extensions
+    "VisualStudioExptTeam.vscodeintellicode",
+    "CoenraadS.bracket-pair-colorizer-2",
+    "aaron-bond.better-comments",
+    "streetsidesoftware.code-spell-checker",
+    "streetsidesoftware.code-spell-checker-french",
+    "MS-vsliveshare.vsliveshare",
+    // Github
+    "eamodio.gitlens",
+    "donjayamanne.githistory",
+    "GitHub.vscode-pull-request-github",
+    // Julia
+    "julialang.language-julia",
+    "singularitti.vscode-julia-formatter",
+    "cameronbieganek.julia-color-themes",
+    "colinfang.markdown-julia",
+    // LaTeX
+    "James-Yu.latex-workshop",
+    // Markdown
+    "yzhang.markdown-all-in-one",
+    "DavidAnson.vscode-markdownlint",
+    // Jupyter Notebook
+    "ms-toolsai.jupyter",
+    // Python
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "njpwerner.autodocstring",
+    "KevinRose.vsc-python-indent",
+    // Restructuredtext
+    "lextudio.restructuredtext",
+    "snooty.snooty",
+    // TOML
+    "tamasfe.even-better-toml",
+]
+}
