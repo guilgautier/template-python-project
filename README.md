@@ -1,5 +1,8 @@
 # template-python-project
 
+[![CI](https://github.com/guilgautier/template-python-project/actions/workflows/main.yml/badge.svg)](https://github.com/guilgautier/template-python-project/actions/workflows/main.yml)
+[![codecov](https://codecov.io/gh/guilgautier/template-python-project/branch/main/graph/badge.svg?token=9O6RRKUA3S)](https://codecov.io/gh/guilgautier/template-python-project)
+
 - [template-python-project](#template-python-project)
   - [Development environment](#development-environment)
   - [Dependency management](#dependency-management)
