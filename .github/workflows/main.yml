@@ -23,12 +23,14 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Checkout project
+      #----------------------------------------------
+      #       Check-out repository project
+      #----------------------------------------------
+      - name: Checkout repository project
         uses: actions/checkout@v2
 
       #----------------------------------------------
-      #       check-out repo and set-up python
+      #       Set-up python
       #----------------------------------------------
       - name: Get Python
         uses: actions/setup-python@v2
@@ -71,7 +73,10 @@ jobs:
       #    run test suite and output coverage file
       #----------------------------------------------
       - name: Test with pytest
-        # see [tool.pytest.ini_options] in pyproject.toml
+        # Configuration of pytest [tool.pytest.ini_options] in pyproject.toml
+        # https://docs.pytest.org/en/latest/reference/customize.html#pyproject-toml
+        # In the template repository options passed are
+        # -ra -q -vv --cov=packagename --cov-report=xml
         run: poetry run pytest
 
       #----------------------------------------------
@@ -85,3 +90,4 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage.xml
+          # generated using --cov-report=xml in Test with pytest
