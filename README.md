@@ -16,6 +16,7 @@
     - [Generate the documentation](#generate-the-documentation)
     - [Publish the documentation](#publish-the-documentation)
   - [Packaging and publishing](#packaging-and-publishing)
+  - [Continuous integration](#continuous-integration)
   - [Miscellaneous](#miscellaneous)
 
 This repository may serve as a template for scientific projects written in [Python](https://www.python.org/).
@@ -234,6 +235,14 @@ TODO
   poetry config http-basic.testpypi __token__ MY_TOKEN
   poetry publish -r testpypi
   ```
+
+## Continuous integration
+
+GitHub Actions
+
+github workflows declared as `.github/workflows/*.yml` files.
+
+To be continued ...
 
 ## Miscellaneous
 
