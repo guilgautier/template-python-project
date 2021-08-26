@@ -86,6 +86,7 @@
     // Markdown
     "[markdown]": {
         "editor.tabSize": 2,
+        "editor.quickSuggestions": true
     },
     // RestructuredText
     "restructuredtext.confPath": "${workspaceFolder}/docs",
@@ -95,5 +96,5 @@
     },
     // Spell checker
     "cSpell.enabled": true,
-    "cSpell.language": "en,fr"
+    "cSpell.language": "en,fr",
 }
