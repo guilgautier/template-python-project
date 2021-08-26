@@ -83,6 +83,12 @@
     "python.showStartPage": false,
     "python.terminal.activateEnvironment": false,
     "autoDocstring.docstringFormat": "sphinx",
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.pytestEnabled": true,
     // Markdown
     "[markdown]": {
         "editor.tabSize": 2,

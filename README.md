@@ -5,54 +5,87 @@
 
 - [template-python-project](#template-python-project)
   - [Development environment](#development-environment)
+    - [IDE: Visual Studio Code](#ide-visual-studio-code)
+    - [Install Poetry](#install-poetry)
+    - [Virtual environnement](#virtual-environnement)
   - [Dependency management](#dependency-management)
   - [Installation](#installation)
     - [Install as a dependency](#install-as-a-dependency)
     - [Install from source and potentially contribute to the project](#install-from-source-and-potentially-contribute-to-the-project)
     - [Install extras dependencies](#install-extras-dependencies)
   - [Testing](#testing)
+    - [Debug tests in VSCode](#debug-tests-in-vscode)
   - [Documentation](#documentation)
     - [Install documentation dependencies](#install-documentation-dependencies)
+    - [Configure the documentation](#configure-the-documentation)
     - [Generate the documentation](#generate-the-documentation)
     - [Publish the documentation](#publish-the-documentation)
   - [Packaging and publishing](#packaging-and-publishing)
+  - [Continuous integration](#continuous-integration)
+    - [Test installation of the package and run tests](#test-installation-of-the-package-and-run-tests)
+    - [Code coverage with Codecov](#code-coverage-with-codecov)
   - [Miscellaneous](#miscellaneous)
 
 This repository may serve as a template for scientific projects written in [Python](https://www.python.org/).
 
 ## Development environment
 
+### IDE: Visual Studio Code
+
 [Visual Studio Code (VSCode)](https://code.visualstudio.com/) is recommended to simplify your coding experience.
 
-The [.vscode](https://github.com/guilgautier/template-python-project/blob/main/.vscode) directory contains a list of suggested extensions together with the corresponding settings.
+The [.vscode](./.vscode) directory contains a list of suggested extensions together with the corresponding settings.
 You can place it at the root of your project workspace.
 
 See also the [vscode-workflow](https://github.com/guilgautier/vscode-workflow) repository.
 
+### Install Poetry
+
+> [Poetry](https://python-poetry.org/) Python Packaging And Dependency Management Made Easy
+
+Poetry is recommended for its simplicity to help you manage your Python project and meet the Python packaging standards.
+
+See the [Poetry's installation instructions](https://python-poetry.org/docs/#installation).
+
+### Virtual environnement
+
+> A [virtual environment](https://docs.python.org/3/tutorial/venv.html) is a self-contained directory tree that contains a Python installation for a particular version of Python, plus a number of additional packages.
+
+It is always good practice to work in a virtual environment, isolated from your other Python projects.
+
+With [Poetry](https://python-poetry.org/) creating/activating a virtual environment is fairly simple
+
+```bash
+poetry shell
+```
+
+The way virtual environments are created is defined in the [poetry.toml](poetry.toml) file, see also [Poetry's documentation](https://python-poetry.org/docs/configuration#virtualenvscreate).
+
+**Note:** In this template project, a virtual environment will be created at the root of the project in a `.venv` folder.
+
+To make sure your classical commands are executed in the virtual environment, e.g., `pytest`, prepend `poetry run ...` , see also the [Testing](#testing) section.
+
+[I don’t want Poetry to manage my virtual environments. Can I disable it?](https://python-poetry.org/docs/faq/#i-dont-want-poetry-to-manage-my-virtual-environments-can-i-disable-it)
+
 ## Dependency management
 
-[Poetry](https://python-poetry.org/) is recommended for its simplicity to help your project meet the Python packaging standards, including
+[Poetry](https://python-poetry.org/) is recommended for its dependency management capabilities.
+On top of installing a given package (like `pip` can do), Poetry also resolves dependencies' version to preserve compatibility.
 
-- working in / activating the virtual environment (cf. [poetry.toml](poetry.toml))
+Dependencies specified in the [`pyproject.toml`](./pyproject.toml) (according to [PEP 518](https://www.python.org/dev/peps/pep-0518/#file-format)) can be declared in the following way.
 
-  ```bash
-  poetry shell
-  ```
+- Install main (non-optional) dependencies
 
-- managing your project dependencies (cf. [`pyproject.toml`](pyproject.toml) according to [cf. PEP 517-518](https://www.python.org/dev/peps/pep-0518/#file-format))
-
-  - main (non-optional) dependencies
-
-  See `[tool.poetry.dependencies]` in [`pyproject.toml`](pyproject.toml)
+  See `[tool.poetry.dependencies]` in [`pyproject.toml`](./pyproject.toml)
 
   ```bash
   poetry add numpy
   poetry remove numpy
   ```
 
-- optional dependencies
+- Install optional dependencies
 
-  See `[tool.poetry.dependencies]` in [`pyproject.toml`](pyproject.toml)
+  See `[tool.poetry.dependencies]` in [`pyproject.toml`](./pyproject.toml)
 
   ```bash
   poetry add jupyter --optional
@@ -61,9 +94,9 @@ See also the [vscode-workflow](https://github.com/guilgautier/vscode-workflow) r
 
   Optional dependencies can then be combined to define package [extra dependencies](#install-extras-dependencies).
 
-- development dependencies
+- Install development dependencies
 
-  See `[tool.poetry.dev-dependencies]` in [`pyproject.toml`](pyproject.toml)
+  See `[tool.poetry.dev-dependencies]` in [`pyproject.toml`](./pyproject.toml)
 
   ```bash
   poetry add black --dev
@@ -94,8 +127,8 @@ See also the [vscode-workflow](https://github.com/guilgautier/vscode-workflow) r
 
   The package can be installed in **editable** mode along with
 
-  - main (non-optional) dependencies, see tool.poetry.dependencies in [`pyproject.toml`](pyproject.toml)
-  - dev dependencies, `[tool.poetry.dev-dependencies]` in [`pyproject.toml`](pyproject.toml)
+  - main (non-optional) dependencies, see tool.poetry.dependencies in [`pyproject.toml`](./pyproject.toml)
+  - dev dependencies, `[tool.poetry.dev-dependencies]` in [`pyproject.toml`](./pyproject.toml)
 
   ```bash
   git clone https://github.com/USERNAME/REPOSITORY_NAME.git
@@ -126,36 +159,46 @@ See also the [vscode-workflow](https://github.com/guilgautier/vscode-workflow) r
 poetry install --extras "name1 name2"
 ```
 
-See also `[tool.poetry.extras]` in [`pyproject.toml`](pyproject.toml) and [Poetry's documentation](https://python-poetry.org/docs/pyproject/#extras).
+See also
+
+- `[tool.poetry.extras]` in [`pyproject.toml`](./pyproject.toml),
+- [Poetry's documentation](https://python-poetry.org/docs/pyproject/#extras).
 
 ## Testing
 
-The [`pytest`](https://docs.pytest.org/en/6.2.x/) framework is recommended to make it easy to write small tests, yet scales to support complex functional testing.
+> The [`pytest`](https://docs.pytest.org/en/6.2.x/) framework makes it easy to write small tests, yet scales to support complex functional testing.
 
-**Note:** `pytest` and `pytest-cov` are listed as development dependencies, and installed as such when `poetry install` was run
+**Note:** In this project `pytest` and `pytest-cov` are listed as development dependencies, and installed as such when `poetry install` was run.
 
 The unit tests of the package are declared in `tests/test_*.py` files as `test_*` functions with a simple `assert` statement.
 
 The configuration of `pytest` is defined in the [`[tool.pytest.ini_options]` section of the `pyproject.toml` file](https://docs.pytest.org/en/latest/reference/customize.html#pyproject-toml).
 
-To run the package test suite, simply execute
+Run the package test suite with
 
 ```bash
 poetry run pytest  # -vv --cov=packagename --cov-report=xml
 ```
 
+### Debug tests in VSCode
+
+Have a look at the
+
+- [Debug Tests](https://code.visualstudio.com/docs/python/testing#_debug-tests) section in VScode documentation,
+- debug tests configuration file [.vscode/launch.json](.vscode/launch.json),
+- [Debugging](https://code.visualstudio.com/docs/python/debugging) section in VScode documentation.
+
 ## Documentation
 
-[Sphinx](https://www.sphinx-doc.org/en/master/index.html) is recommended to generate the project's documentation.
+> [Sphinx](https://www.sphinx-doc.org/en/master/index.html)  is a tool that makes it easy to create intelligent and beautiful documentation.
 
 Sphinx is in charge of building the documentation and generating HTML output, but also PDF, epub, ...
 
-- The documentation configuration file is located at `docs/conf.py`.
-- The source files of the documentation are simply  `.rst` (reStructuredText) or `.md` (Markdown) files. However we suggest using reST markup to keep the same syntax and format as used for writting [Python docstings](https://devguide.python.org/documenting/).
+The source files of the documentation are simply  `.rst` (reStructuredText) or `.md` (Markdown) files. However we suggest using reST markup to keep the same syntax and format as used for writing [Python docstings](https://devguide.python.org/documenting/).
 
 ### Install documentation dependencies
 
-- Install `docs` extras dependencies, see `[tool.poetry.extras]` in [`pyproject.toml`](pyproject.toml)
+Install `docs` extras dependencies, see `[tool.poetry.extras]` in [`pyproject.toml`](./pyproject.toml)
 
   ```bash
   poetry install -E docs
@@ -163,14 +206,21 @@ Sphinx is in charge of building the documentation and generating HTML output, bu
   # pip install ".[docs]"
   ```
 
+### Configure the documentation
+
+The configuration file is located at [`docs/conf.py`](./docs/conf.py).
+
+- Edit the metadata of the package defined in [`docs/conf.py`](./docs/conf.py),
+- See also the [sphinx documentation](https://www.sphinx-doc.org/en/master/usage/configuration.html)
+
 ### Generate the documentation
 
-You can either use
+To generate the documentation locally, i.e., on your machine, you can either use
 
 - basic command
 
   ```bash
-  sphinx-build -b html docs docs/_build/
+  poetry run sphinx-build -b html docs docs/_build/html
   ```
 
   and navigate the documentation
@@ -183,13 +233,15 @@ You can either use
 
   If you have successfully [installed documentation dependencies](#install-documentation-dependencies) then [`sphinx-autobuild`](https://github.com/executablebooks/sphinx-autobuild) should be available.
 
-  [`sphinx-autobuild`](https://github.com/executablebooks/sphinx-autobuild) generates the documentation and make a live view available in your browser.
+  [`sphinx-autobuild`](https://github.com/executablebooks/sphinx-autobuild) generates the documentation and makes a live view available in your browser.
+
+  Changes made to `.rst` files will be reflected live in your favorite browser at <http://127.0.0.1:8000>.
 
   ```bash
-  sphinx-autobuild docs docs/_build/html
+  poetry run sphinx-autobuild docs docs/_build/html
   ```
 
-  ```
+  ```text
   ....
   build succeeded.
 
@@ -197,13 +249,13 @@ You can either use
   [sphinx-autobuild] Serving on http://127.0.0.1:8000
   ```
 
-  Changes made to `.rst` files will be reflected live in your favorite browser at <http://127.0.0.1:8000>
-
-**Note:** In both cases, any change made in the source `.py` files or the `docs/conf.py` file require rebuiling the documentation.
+**Note:** In both cases, any change made in the source `.py` files or the `docs/conf.py` file require rebuilding the documentation.
 
 ### Publish the documentation
 
-TODO
+> [Read the Docs](https://readthedocs.org/) simplifies software documentation by automating building, versioning, and hosting of your docs for you.
+
+After [linking your project with Read the Docs](https://docs.readthedocs.io/en/stable/intro/import-guide.html), you can configure Read the Docs to deploy the documentation of the package at <https://packagename.readthedocs.io/>, automatically or manually.
 
 ## Packaging and publishing
 
@@ -217,7 +269,11 @@ TODO
 
 - publish your package on a Package Index (PI)
 
-  - [PyPI](https://pypi.org/) (default), see [Poetry documentation](https://python-poetry.org/docs/repositories/#configuring-credentials)
+  - [PyPI](https://pypi.org/) (default)
+
+    - [Poetry publish to PyPI](https://python-poetry.org/docs/libraries/#publishing-to-pypi)
+    - [Poetry configure credentials](https://python-poetry.org/docs/repositories/#configuring-credentials)
+    - [PyPI token](https://pypi.org/help/#apitoken)
 
   ```bash
   poetry config pypi-token.pypi MY_TOKEN
@@ -226,14 +282,29 @@ TODO
 
   - [TestPyPI](https://test.pypi.org/) it is good practice to first publish on TestPyPI and check the results before publishing on the official PyPI
 
-  - [Poetry documentation](https://python-poetry.org/docs/repositories/#adding-a-repository)
-  - <https://test.pypi.org/help/#apitoken>
+    - [Poetry documentation](https://python-poetry.org/docs/repositories/#adding-a-repository)
+    - [Poetry configure credentials](https://python-poetry.org/docs/repositories/#configuring-credentials)
+    - [TestPyPI token](https://test.pypi.org/help/#apitoken)
 
   ```bash
   poetry config repositories.testpypi https://test.pypi.org/legacy/
   poetry config http-basic.testpypi __token__ MY_TOKEN
   poetry publish -r testpypi
   ```
+
+## Continuous integration
+
+> [GitHub Actions](https://github.com/features/actions) makes it easy to automate all your software workflows, now with world-class CI/CD. Build, test, and deploy your code right from GitHub. Make code reviews, branch management, and issue triaging work the way you want.
+
+GitHub workflows declared as [`.github/workflows/*.yml`](./.github/workflows) files.
+
+### Test installation of the package and run tests
+
+TODO
+
+### Code coverage with Codecov
+
+TODO
 
 ## Miscellaneous
 
