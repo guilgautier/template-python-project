@@ -77,3 +77,8 @@ build-backend = "poetry.core.masonry.api"
 minversion = "6.0"
 addopts = "-ra -q -vv --cov=packagename --cov-report=xml"
 testpaths = ["tests"]
+
+[tool.pyright]
+include = ["src"]
+exclude = ["**/__pycache__"]
+venv = "./.venv"

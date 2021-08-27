@@ -2,11 +2,6 @@
 // An opinionated list of VS Code settings used by Guillaume Gautier guilgautier https://guilgautier.github.io/
 {
     "breadcrumbs.enabled": true,
-    "code-runner.runInTerminal": true,
-    "code-runner.executorMap": {
-        "cpp": "cd $dir && g++ -std=c++14 $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
-        "python": "python -u"
-    },
     // Explorer
     "explorer.sortOrder": "type",
     // Workbench
@@ -42,14 +37,9 @@
     "editor.tabSize": 4,
     "editor.tokenColorCustomizations": null,
     "editor.wordWrap": "bounded",
-    "editor.quickSuggestions": { // Controls if quick suggestions should show up while typing
-        "comments": false,
-        "other": true,
-        "strings": true
-    },
+    "editor.quickSuggestions": true,
     // Terminal
     "terminal.integrated.inheritEnv": false,
-    "terminal.integrated.rendererType": "auto",
     "terminal.integrated.defaultProfile.osx": "zsh",
     "terminal.integrated.fontFamily": "Meslo LG L DZ for Powerline",
     "terminal.integrated.commandsToSkipShell": [
@@ -76,23 +66,17 @@
     },
     "python.languageServer": "Pylance",
     "python.condaPath": "~/opt/anaconda3/bin/anaconda",
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv",
     "python.formatting.provider": "black",
-    "pythonIndent.trimLinesWithOnlyWhitespace": true,
-    "python.linting.enabled": false,
+    "python.linting.enabled": true,
     "python.linting.lintOnSave": true,
-    "python.showStartPage": false,
     "python.terminal.activateEnvironment": false,
     "autoDocstring.docstringFormat": "sphinx",
-    "python.testing.pytestArgs": [
-        "tests"
-    ],
-    "python.testing.unittestEnabled": false,
-    "python.testing.nosetestsEnabled": false,
-    "python.testing.pytestEnabled": true,
+    "pythonIndent.trimLinesWithOnlyWhitespace": true,
     // Markdown
     "[markdown]": {
         "editor.tabSize": 2,
-        "editor.quickSuggestions": true
+        "editor.quickSuggestions": true,
     },
     // RestructuredText
     "restructuredtext.confPath": "${workspaceFolder}/docs",
