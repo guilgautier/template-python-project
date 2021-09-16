@@ -67,11 +67,12 @@
     "python.languageServer": "Pylance",
     "python.condaPath": "~/opt/anaconda3/bin/anaconda",
     "python.defaultInterpreterPath": "${workspaceFolder}/.venv",
+    "python.pythonPath": "${workspaceFolder}/.venv/bin/python",
     "python.formatting.provider": "black",
     "python.linting.enabled": true,
     "python.linting.lintOnSave": true,
     "python.terminal.activateEnvironment": false,
-    "autoDocstring.docstringFormat": "sphinx",
+    "autoDocstring.docstringFormat": "google",
     "pythonIndent.trimLinesWithOnlyWhitespace": true,
     // Markdown
     "[markdown]": {
@@ -87,4 +88,11 @@
     // Spell checker
     "cSpell.enabled": true,
     "cSpell.language": "en,fr",
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.pytestEnabled": true,
+    // "restructuredtext.languageServer.disabled": true,
 }

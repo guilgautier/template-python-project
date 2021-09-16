@@ -3,18 +3,18 @@
 
 
 def addition(x, y):
-    r"""Compute the addition
+    """Compute ``x + y``, i.e., the result of the addition
 
     .. math::
         :label: eq:my-addition
 
         x + y
 
-    :param x: first arguments
-    :type x: Number
-    :param y: second argument
-    :type y: Number
-    :return: :math:`x + y`
-    :rtype: Number
+    Args:
+        x (number): First number
+        y (number): Second number
+
+    Returns:
+        number: :math:`x + y`
     """
     return x + y
