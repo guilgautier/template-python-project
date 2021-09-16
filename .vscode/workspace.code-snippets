@@ -1,0 +1,11 @@
+// See also https://github.com/guilgautier/vscode-workflow/blob/main/guilgautier.code-snippets
+{
+    "my email": {
+        "scope": "latex,markdown,text",
+        "prefix": "myemail",
+        "body": [
+            "bonjour.gga@gmail.com"
+        ],
+        "description": ""
+    },
+}
