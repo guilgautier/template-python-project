@@ -13,13 +13,6 @@
         "eamodio.gitlens",
         "donjayamanne.githistory",
         "GitHub.vscode-pull-request-github",
-        // Julia
-        "julialang.language-julia",
-        "singularitti.vscode-julia-formatter",
-        "cameronbieganek.julia-color-themes",
-        "colinfang.markdown-julia",
-        // LaTeX
-        "James-Yu.latex-workshop",
         // Markdown
         "yzhang.markdown-all-in-one",
         "DavidAnson.vscode-markdownlint",
@@ -31,9 +24,10 @@
         "njpwerner.autodocstring",
         "KevinRose.vsc-python-indent",
         // Restructuredtext
-        "lextudio.restructuredtext",
-        "snooty.snooty",
+        "lextudio.restructuredtext-pack",
         // TOML
         "tamasfe.even-better-toml",
+        //Table formatter
+        "shuworks.vscode-table-formatter",
     ]
 }
