@@ -29,8 +29,9 @@ author = "Guillaume Gautier"
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    "sphinx.ext.doctest",
     "sphinx.ext.autodoc",
+    "sphinx.ext.doctest",
+    "sphinx.ext.napoleon",  # support google and numpy docstring style
     "sphinx.ext.viewcode",
     "sphinx.ext.mathjax",  # LaTeX math rendering
     "sphinxcontrib.bibtex",  # Bibliography management

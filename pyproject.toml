@@ -24,9 +24,12 @@ packages = []
 # These packages are mandatory and form the core of this package’s distribution.
 python = ">=3.8,<3.10" # <3.10 required by scipy
 
+# poetry add name
 numpy = "^1.20.2"
 scipy = "^1.6.2"
 matplotlib = "^3.4.1"
+
+# poetry add name --optional
 
 # Jupyter notebooks
 jupyter = { version = "^1.0.0", optional = true }
@@ -48,10 +51,14 @@ sphinxcontrib-bibtex = { version = "^2.3.0", optional = true }
 rstcheck = { version = "^3.3.1", optional = true }
 
 [tool.poetry.dev-dependencies]
+# poetry add name --dev
 pytest = "^6.2.3"      # used to run the test suite of the package
 pytest-cov = "^2.11.1" # used to generate coverage report to be uploaded on Codecov for example, see --cov and cov-report in tool.pytest.ini_options
 
 black = "^21.5b2" # Python "uncompromising" code formatter https://github.com/psf/black
+isort = "^5.9.3"
+
+pre-commit = "^2.15.0"
 
 # A list of all of the optional dependencies, some of which are included in the
 # below `extras`. They can be opted into by apps.
