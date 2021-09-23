@@ -1,3 +1,4 @@
+// ere
 {
     // Use IntelliSense to learn about possible attributes.
     // Hover to view descriptions of existing attributes.
@@ -7,7 +8,10 @@
         { // https://code.visualstudio.com/docs/python/debugging
             "name": "Debug tests",
             "type": "python",
-            "request": "test", // https://code.visualstudio.com/docs/python/testing#_debug-tests
+            "request": "launch",
+            "purpose": [
+                "debug-test", // https://code.visualstudio.com/docs/python/testing#_debug-tests
+            ],
             "program": "${file}",
             // "console": "integratedTerminal", // problem with zsh https://github.com/microsoft/vscode-python/issues/10398#issuecomment-597454312
             "justMyCode": true,
