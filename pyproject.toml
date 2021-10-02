@@ -72,12 +72,12 @@ docs = ["Sphinx", "sphinx-autobuild", "sphinxcontrib-bibtex", "rstcheck"]
 pytest = "^6.2.3"      # used to run the test suite of the package
 pytest-cov = "^2.11.1" # used to generate coverage report to be uploaded on Codecov for example, see --cov and cov-report in tool.pytest.ini_options
 
+# https://pre-commit.com/
+pre-commit = "^2.15.0"
 # Python "uncompromising" code formatter https://github.com/psf/black
 black = { extras = ["jupyter"], version = "^21.9b0" }
 isort = "^5.9.3"
-
-pre-commit = "^2.15.0"
-toml = "^0.10.2"
+pydocstyle = "^6.1.1"
 
 [build-system]
 # poetry build
