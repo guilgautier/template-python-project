@@ -80,6 +80,7 @@ Dependencies specified in the [`pyproject.toml`](./pyproject.toml) (according to
 
   ```bash
   poetry add numpy
+  # poetry add "packagename[extra1,extra2]"
   poetry remove numpy
   ```
 
@@ -89,6 +90,7 @@ Dependencies specified in the [`pyproject.toml`](./pyproject.toml) (according to
 
   ```bash
   poetry add jupyter --optional
+  # poetry add "packagename[extra1,extra2]" --optional
   poetry remove jupyter
   ```
 
@@ -100,6 +102,7 @@ Dependencies specified in the [`pyproject.toml`](./pyproject.toml) (according to
 
   ```bash
   poetry add black --dev
+  # poetry add "packagename[extra1,extra2]" --dev
   poetry remove black --dev
   ```
 
@@ -111,7 +114,9 @@ Dependencies specified in the [`pyproject.toml`](./pyproject.toml) (according to
 
   ```bash
   poetry add packagename
-  # pip install packagename
+  # equivalent to pip install packagename
+  poetry add "packagename[extra1,extra2]"
+  # equivalent to pip install "packagename[extra1,extra2]"
   ```
 
 - Otherwise, install the latest version from source (which might be broken)
