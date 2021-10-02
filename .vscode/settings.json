@@ -71,7 +71,9 @@
     "python.linting.enabled": true,
     "python.linting.lintOnSave": true,
     "python.terminal.activateEnvironment": false,
-    "autoDocstring.docstringFormat": "google", // Need "sphinx.ext.napoleon" extension in docs/conf.py
+    // Need "sphinx.ext.napoleon" extension in docs/conf.py
+    "autoDocstring.docstringFormat": "google",
+    "autoDocstring.includeExtendedSummary": true,
     "pythonIndent.trimLinesWithOnlyWhitespace": true,
     // Markdown
     "[markdown]": {
