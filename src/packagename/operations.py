@@ -1,14 +1,10 @@
-#!/usr/bin/env python3
-# coding=utf-8
-
-
 def addition(x, y):
-    """Compute ``x + y``, i.e., the result of the addition
+    """Compute the addition ``x + y``.
 
     .. math::
         :label: eq:my-addition
 
-        x + y
+        x + y.
 
     Args:
         x (number): First number
