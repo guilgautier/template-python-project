@@ -5,9 +5,12 @@
 
 - [template-python-project](#template-python-project)
   - [Development environment](#development-environment)
+    - [WARNING for conda users](#warning-for-conda-users)
     - [IDE: Visual Studio Code](#ide-visual-studio-code)
     - [Install Poetry](#install-poetry)
-    - [Virtual environnement](#virtual-environnement)
+    - [Manage Python versions](#manage-python-versions)
+    - [Virtual environment](#virtual-environment)
+      - [Note](#note)
   - [Dependency management](#dependency-management)
   - [Installation](#installation)
     - [Install as a dependency](#install-as-a-dependency)
@@ -27,9 +30,25 @@
     - [Code coverage with Codecov](#code-coverage-with-codecov)
   - [Miscellaneous](#miscellaneous)
 
-This repository may serve as a template for scientific projects written in [Python](https://www.python.org/).
+This repository may serve as a template for scientific projects developed in [Python](https://www.python.org/) using [Poetry](https://python-poetry.org/).
 
 ## Development environment
+
+### WARNING for conda users
+
+If you have [`Anaconda`](https://www.anaconda.com/) or [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html) installed,
+
+1. **DISABLE** the auto-activation of the base environment
+
+    ```bash
+    conda config --set auto_activate_base false
+    ```
+
+2. **ALWAYS DEACTIVATE** your conda environment before running any of the following commands
+
+    ```bash
+    conda deactivate
+    ```
 
 ### IDE: Visual Studio Code
 
@@ -44,29 +63,59 @@ See also the [vscode-workflow](https://github.com/guilgautier/vscode-workflow) r
 
 > [Poetry](https://python-poetry.org/) Python Packaging And Dependency Management Made Easy
 
-Poetry is recommended for its simplicity to help you manage your Python project and meet the Python packaging standards.
+Poetry is recommended for its simplicity to manage your Python project in many ways, make it meet the Python packaging standards.
 
-See the [Poetry's installation instructions](https://python-poetry.org/docs/#installation).
+1. Read [WARNING for conda users](#warning-for-conda-users),
+2. See the [Poetry's installation instructions](https://python-poetry.org/docs/#installation),
+3. Check your `poetry` version
 
-### Virtual environnement
+    ```bash
+    poetry --version
+    ```
+
+If you get an error, please check [python-poetry/poetry/issues/507](https://github.com/python-poetry/poetry/issues/507)
+
+### Manage Python versions
+
+As mentioned on [Poetry's documentation](https://python-poetry.org/docs/managing-environments/)
+
+> To easily switch between Python versions, it is recommended to use [`pyenv`](<https://github.com/pyenv/>> pyenv) or similar tools.
+>
+> For instance, if your project is Python 2.7 only, a standard workflow would be:
+>
+> ```bash
+> pyenv install 2.7.15
+> pyenv local 2.7.15  # Activate Python 2.7 for the current project
+> poetry install
+> ```
+
+See also the [Real Python's tutorial "Intro to `pyenv`"](https://realpython.com/intro-to-pyenv/).
+
+### Virtual environment
 
 > A [virtual environment](https://docs.python.org/3/tutorial/venv.html) is a self-contained directory tree that contains a Python installation for a particular version of Python, plus a number of additional packages.
 
 It is always good practice to work in a virtual environment, isolated from your other Python projects.
 
-With [Poetry](https://python-poetry.org/) creating/activating a virtual environment is fairly simple
+With [Poetry](https://python-poetry.org/) creating/activating a virtual environment is fairly simple (please read [WARNING for conda users](#warning-for-conda-users))
 
 ```bash
-poetry shell
+# conda deactivate for conda users
+poetry shell  # a (.venv) flag should appear
 ```
 
-The way virtual environments are created is defined in the [poetry.toml](poetry.toml) file, see also [Poetry's documentation](https://python-poetry.org/docs/configuration#virtualenvscreate).
+To make sure your classical commands are executed in the virtual environment, e.g., `pytest`, prepend `poetry run ...`
 
-**Note:** In this template project, a virtual environment will be created at the root of the project in a `.venv` folder.
+See also
 
-To make sure your classical commands are executed in the virtual environment, e.g., `pytest`, prepend `poetry run ...` , see also the [Testing](#testing) section.
+- [Testing](#testing),
+- [Documentation](#generate-the-documentation).
 
-[I don’t want Poetry to manage my virtual environments. Can I disable it?](https://python-poetry.org/docs/faq/#i-dont-want-poetry-to-manage-my-virtual-environments-can-i-disable-it)
+#### Note
+
+In this template project, a virtual environment will be created at the root of the project in a `.venv` folder, as defined in the [poetry.toml](./poetry.toml) file, see also [Poetry's documentation](https://python-poetry.org/docs/configuration#virtualenvscreate).
+
+If you [don’t want `poetry` to manage my virtual environments. Can I disable it?](https://python-poetry.org/docs/faq/#i-dont-want-poetry-to-manage-my-virtual-environments-can-i-disable-it)
 
 ## Dependency management
 
@@ -147,7 +196,7 @@ Dependencies specified in the [`pyproject.toml`](./pyproject.toml) (according to
 
 - with pip
 
-  Note that, from the current `pyproject.toml` file, it is **not** possible to install the project in editable mode ~~`pip install -e .`~~.
+  Note that, from the current [`pyproject.toml`](./pyproject.toml) file, it is **not** possible to install the project in editable mode ~~`pip install -e .`~~.
   Please consider installing with Poetry instead.
 
   ```bash
@@ -176,7 +225,7 @@ See also
 
 **Note:** In this project `pytest` and `pytest-cov` are listed as development dependencies, and installed as such when `poetry install` was run.
 
-The unit tests of the package are declared in `tests/test_*.py` files as `test_*` functions with a simple `assert` statement.
+The unit tests of the package are declared in [`tests/test_*.py`](./tests/) files as `test_*` functions with a simple `assert` statement.
 
 The configuration of `pytest` is defined in the [`[tool.pytest.ini_options]` section of the `pyproject.toml` file](https://docs.pytest.org/en/latest/reference/customize.html#pyproject-toml).
 
@@ -263,7 +312,7 @@ To generate the documentation locally, i.e., on your machine, you can either use
   [sphinx-autobuild] Serving on http://127.0.0.1:8000
   ```
 
-**Note:** In both cases, any change made in the source `.py` files or the `docs/conf.py` file require rebuilding the documentation.
+**Important:** In both cases, any change made in the source `.py` files or the [`docs/conf.py`](./docs/conf.py) file require rebuilding the documentation.
 
 ### Publish the documentation
 
