@@ -1,22 +1,33 @@
-// ere
 {
     // Use IntelliSense to learn about possible attributes.
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
+    // https://code.visualstudio.com/docs/python/debugging
     "configurations": [
-        { // https://code.visualstudio.com/docs/python/debugging
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
+        {
+            // https://code.visualstudio.com/docs/python/testing#_debug-tests
             "name": "Debug tests",
             "type": "python",
             "request": "launch",
+            // avoid purpose debug-test when tests/subfolders are present
             "purpose": [
-                "debug-test", // https://code.visualstudio.com/docs/python/testing#_debug-tests
+                "debug-test"
             ],
             "program": "${file}",
-            // "console": "integratedTerminal", // problem with zsh https://github.com/microsoft/vscode-python/issues/10398#issuecomment-597454312
+            "console": "integratedTerminal", // problem with zsh https://github.com/microsoft/vscode-python/issues/10398#issuecomment-597454312
             "justMyCode": true,
             "env": {
-                "PYTEST_ADDOPTS": "--no-cov" // https://stackoverflow.com/a/67185092
+                // when using pytest-cov need to deactivate the coverage
+                // https://stackoverflow.com/a/67185092
+                "PYTEST_ADDOPTS": "--no-cov"
             }
         }
     ]

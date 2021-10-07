@@ -14,7 +14,8 @@
     - [Install from source and potentially contribute to the project](#install-from-source-and-potentially-contribute-to-the-project)
     - [Install extras dependencies](#install-extras-dependencies)
   - [Testing](#testing)
-    - [Debug tests in VSCode](#debug-tests-in-vscode)
+    - [Run tests using VSCode](#run-tests-using-vscode)
+  - [Debugging](#debugging)
   - [Documentation](#documentation)
     - [Install documentation dependencies](#install-documentation-dependencies)
     - [Configure the documentation](#configure-the-documentation)
@@ -185,13 +186,21 @@ Run the package test suite with
 poetry run pytest  # -vv --cov=packagename --cov-report=xml
 ```
 
-### Debug tests in VSCode
+### Run tests using VSCode
 
-Have a look at the
+See the [Testing](https://code.visualstudio.com/docs/python/testing) section of the VSCode documentation.
 
-- [Debug Tests](https://code.visualstudio.com/docs/python/testing#_debug-tests) section in VScode documentation,
-- debug tests configuration file [.vscode/launch.json](.vscode/launch.json),
-- [Debugging](https://code.visualstudio.com/docs/python/debugging) section in VScode documentation.
+## Debugging
+
+The configuration file [.vscode/launch.json](.vscode/launch.json) contains two configurations for debugging
+
+1. Python generic
+2. Python test files
+
+For more details, check out the documentation
+
+- [Debugging](https://code.visualstudio.com/docs/python/debugging),
+- [Debug Tests](https://code.visualstudio.com/docs/python/testing#_debug-tests).
 
 ## Documentation
 
