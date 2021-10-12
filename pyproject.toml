@@ -18,27 +18,31 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: Scientific/Engineering :: Mathematics",
 ] # https://pypi.org/classifiers/
+
+# https://python-poetry.org/docs/pyproject/#packages
 packages = []
 
-[tool.poetry.dependencies]
+# https://python-poetry.org/docs/pyproject/#include-and-exclude
+include = [] # ["data/**/*"]
+exclude = []
+
+[tool.poetry.dependencies] # https://python-poetry.org/docs/cli/#add
 # These packages are mandatory and form the core of this package’s distribution.
 python = ">=3.8,<3.10" # <3.10 required by scipy
 
-# poetry add name
+# Install latest version of dependency package-name using
+# poetry add package-name
+# specific the version
 numpy = "^1.20.2"
 scipy = "^1.6.2"
 matplotlib = "^3.4.1"
 
 # A list of all of the optional dependencies, some of which are included in the
 # below `extras`. They can be opted into by apps.
-# poetry add name --optional
+# poetry add package-name --optional
 
-# Jupyter notebooks
+# Jupyter notebooks within VSCode
 jupyter = { version = "^1.0.0", optional = true }
-ipykernel = { version = "^5.5.3", optional = true }
-# Add extensions to Jupyter https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/index.html
-jupyter-contrib-nbextensions = { version = "^0.5.1", optional = true }
-jupyter_nbextensions_configurator = { version = "^0.4.1", optional = true }
 
 # Documentation
 Sphinx = { version = "^4.0.3", optional = true }
@@ -54,12 +58,7 @@ rstcheck = { version = "^3.3.1", optional = true }
 
 [tool.poetry.extras]
 # poetry install -E notebook -E docs
-notebook = [
-    "jupyter",
-    "ipykernel",
-    "jupyter-contrib-nbextensions",      # https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/install.html
-    "jupyter_nbextensions_configurator",
-]
+notebook = ["jupyter"]
 # Documentation is generated with Sphinx
 # https://www.sphinx-doc.org/en/master/index.html
 docs = ["Sphinx", "sphinx-autobuild", "sphinxcontrib-bibtex", "rstcheck"]
@@ -68,9 +67,9 @@ docs = ["Sphinx", "sphinx-autobuild", "sphinxcontrib-bibtex", "rstcheck"]
 # poetry install installs project in editable mode + dev-dependencies
 # poetry install --no-dev
 [tool.poetry.dev-dependencies]
-# poetry add name --dev
+# poetry add package-name --dev
 pytest = "^6.2.3"      # used to run the test suite of the package
-pytest-cov = "^2.11.1" # used to generate coverage report to be uploaded on Codecov for example, see --cov and cov-report in tool.pytest.ini_options
+pytest-cov = "^2.11.1" # used to generate coverage report to be uploaded on Codecov for example, see --cov and --cov-report in tool.pytest.ini_options
 
 # https://pre-commit.com/
 pre-commit = "^2.15.0"
