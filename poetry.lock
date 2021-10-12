@@ -238,7 +238,7 @@ name = "docutils"
 version = "0.17.1"
 description = "Docutils -- Python Documentation Utilities"
 category = "main"
-optional = true
+optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
 [[package]]
@@ -1094,8 +1094,8 @@ use_chardet_on_py3 = ["chardet (>=3.0.2,<5)"]
 name = "rstcheck"
 version = "3.3.1"
 description = "Checks syntax of reStructuredText and code blocks nested within it"
-category = "main"
-optional = true
+category = "dev"
+optional = false
 python-versions = "*"
 
 [package.dependencies]
@@ -1411,13 +1411,14 @@ python-versions = "*"
 notebook = ">=4.4.1"
 
 [extras]
-docs = ["Sphinx", "sphinx-autobuild", "sphinxcontrib-bibtex", "rstcheck"]
+docs = ["Sphinx", "sphinx-autobuild", "sphinxcontrib-bibtex"]
 notebook = ["jupyter"]
+rtd = ["Sphinx", "sphinxcontrib-bibtex"]
 
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.8,<3.10" # <3.10 required by scipy
-content-hash = "67f9eee75ebf6dd7d21c4dd2f9313fe30fb71ad1661281aaa6c53481cb4a3ddb"
+content-hash = "3af8bf352709b280d8a0af00557348154299a136e2ca22e64e7970fbd640dd48"
 
 [metadata.files]
 alabaster = [
