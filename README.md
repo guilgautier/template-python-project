@@ -1,5 +1,6 @@
 # template-python-project
 
+[![Documentation Status](https://readthedocs.org/projects/template-python-project/badge/?version=latest)](https://template-python-project.readthedocs.io/en/latest/?badge=latest)
 [![CI](https://github.com/guilgautier/template-python-project/actions/workflows/main.yml/badge.svg)](https://github.com/guilgautier/template-python-project/actions/workflows/main.yml)
 [![codecov](https://codecov.io/gh/guilgautier/template-python-project/branch/main/graph/badge.svg?token=9O6RRKUA3S)](https://codecov.io/gh/guilgautier/template-python-project)
 
