@@ -63,10 +63,10 @@ See also the [vscode-workflow](https://github.com/guilgautier/vscode-workflow) r
 
 > [Poetry](https://python-poetry.org/) Python Packaging And Dependency Management Made Easy
 
-Poetry is recommended for its simplicity to manage your Python project in many ways, make it meet the Python packaging standards.
+Poetry is recommended for its simplicity to manage your Python project in many ways and make it meet the Python packaging standards.
 
 1. Read [WARNING for conda users](#warning-for-conda-users),
-2. See the [Poetry's installation instructions](https://python-poetry.org/docs/#installation),
+2. See [Poetry's installation instructions](https://python-poetry.org/docs/#installation),
 3. Check your `poetry` version
 
     ```bash
@@ -79,11 +79,12 @@ If you get an error, please check [python-poetry/poetry/issues/507](https://gith
 
 As mentioned on [Poetry's documentation](https://python-poetry.org/docs/managing-environments/)
 
-> To easily switch between Python versions, it is recommended to use [`pyenv`](<https://github.com/pyenv/>> pyenv) or similar tools.
+> To easily switch between Python versions, it is recommended to use [`pyenv`](https://github.com/pyenv/) or similar tools.
 >
 > For instance, if your project is Python 2.7 only, a standard workflow would be:
 >
 > ```bash
+> # cd path-to-your-project
 > pyenv install 2.7.15
 > pyenv local 2.7.15  # Activate Python 2.7 for the current project
 > poetry install
@@ -332,28 +333,28 @@ After [linking your project with Read the Docs](https://docs.readthedocs.io/en/s
 
 - publish your package on a Package Index (PI)
 
+  - [TestPyPI](https://test.pypi.org/) it is good practice to first publish on TestPyPI and check the results before publishing on the official [PyPI](https://pypi.org/) (see next bullet)
+
+    - [Poetry documentation](https://python-poetry.org/docs/repositories/#adding-a-repository)
+    - [Poetry configure credentials](https://python-poetry.org/docs/repositories/#configuring-credentials)
+    - [TestPyPI token](https://test.pypi.org/help/#apitoken)
+
+    ```bash
+    poetry config repositories.testpypi https://test.pypi.org/legacy/
+    poetry config http-basic.testpypi __token__ MY_TOKEN
+    poetry publish -r testpypi
+    ```
+
   - [PyPI](https://pypi.org/) (default)
 
     - [Poetry publish to PyPI](https://python-poetry.org/docs/libraries/#publishing-to-pypi)
     - [Poetry configure credentials](https://python-poetry.org/docs/repositories/#configuring-credentials)
     - [PyPI token](https://pypi.org/help/#apitoken)
 
-  ```bash
-  poetry config pypi-token.pypi MY_TOKEN
-  poetry publish
-  ```
-
-  - [TestPyPI](https://test.pypi.org/) it is good practice to first publish on TestPyPI and check the results before publishing on the official PyPI
-
-    - [Poetry documentation](https://python-poetry.org/docs/repositories/#adding-a-repository)
-    - [Poetry configure credentials](https://python-poetry.org/docs/repositories/#configuring-credentials)
-    - [TestPyPI token](https://test.pypi.org/help/#apitoken)
-
-  ```bash
-  poetry config repositories.testpypi https://test.pypi.org/legacy/
-  poetry config http-basic.testpypi __token__ MY_TOKEN
-  poetry publish -r testpypi
-  ```
+    ```bash
+    poetry config pypi-token.pypi MY_TOKEN
+    poetry publish
+    ```
 
 ## Continuous integration
 
