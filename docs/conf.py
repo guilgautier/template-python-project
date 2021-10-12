@@ -31,14 +31,12 @@ author = "Guillaume Gautier"
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.doctest",
+    "sphinx.ext.mathjax",  # LaTeX math rendering
     "sphinx.ext.napoleon",  # support google and numpy docstring style
     "sphinx.ext.viewcode",
-    "sphinx.ext.mathjax",  # LaTeX math rendering
     "sphinxcontrib.bibtex",  # Bibliography management
+    "matplotlib.sphinxext.plot_directive",  # Matplotlib plots rendering
 ]
-# "matplotlib.sphinxext.plot_directive" to generate matplotlib plots in the documentation
-# see https://matplotlib.org/stable/api/sphinxext_plot_directive_api.html
-
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
@@ -48,7 +46,6 @@ html_static_path = ["_static"]
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
-
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -69,3 +66,17 @@ html_theme = "alabaster"
 bibtex_bibfiles = ["./bibliography/bibliography.bib"]
 bibtex_encoding = "latin"
 # bibtex_reference_style = "alpha"  # alpha, plain , unsrt, and unsrtalpha
+
+# matplotlib.sphinxext.plot_directive
+# https://matplotlib.org/stable/api/sphinxext_plot_directive_api.html
+
+# plot_include_source = True
+# plot_html_show_source_link =
+# plot_pre_code =
+# plot_basedir =
+# plot_formats =
+# plot_html_show_formats =
+# plot_rcparams =
+# plot_apply_rcparams =
+# plot_working_directory =
+# plot_template =
