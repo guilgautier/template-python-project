@@ -58,10 +58,17 @@ rstcheck = { version = "^3.3.1", optional = true }
 
 [tool.poetry.extras]
 # poetry install -E notebook -E docs
+
+# Jupyter notebooks to be edited in VSCode
 notebook = ["jupyter"]
+
 # Documentation is generated with Sphinx
 # https://www.sphinx-doc.org/en/master/index.html
+# - locally poetry run sphinx-autobuild docs docs/_build/html
 docs = ["Sphinx", "sphinx-autobuild", "sphinxcontrib-bibtex", "rstcheck"]
+# - Read The Docs, see .readthedocs.yaml
+# https://template-python-project.readthedocs.io/en/latest/
+rtd = ["Sphinx", "sphinxcontrib-bibtex"]
 
 # Development dependencies
 # poetry install installs project in editable mode + dev-dependencies

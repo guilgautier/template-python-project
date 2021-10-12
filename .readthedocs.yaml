@@ -45,7 +45,7 @@ python:
     # - requirements: docs/requirements.txt
     - method: pip
       path: .
-      # pip install .[docs] see [tool.poetry.extras] in pyproject.toml
+      # pip install .[rtd] see [tool.poetry.extras] in pyproject.toml
       extra_requirements:
         - docs
     # - method: setuptools
