@@ -1094,7 +1094,7 @@ use_chardet_on_py3 = ["chardet (>=3.0.2,<5)"]
 name = "rstcheck"
 version = "3.3.1"
 description = "Checks syntax of reStructuredText and code blocks nested within it"
-category = "dev"
+category = "main"
 optional = false
 python-versions = "*"
 
@@ -1411,14 +1411,14 @@ python-versions = "*"
 notebook = ">=4.4.1"
 
 [extras]
-docs = ["Sphinx", "sphinx-autobuild", "sphinxcontrib-bibtex"]
+docs = ["Sphinx", "sphinx-autobuild", "sphinxcontrib-bibtex", "rstcheck"]
 notebook = ["jupyter"]
 rtd = ["Sphinx", "sphinxcontrib-bibtex"]
 
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.8,<3.10" # <3.10 required by scipy
-content-hash = "3af8bf352709b280d8a0af00557348154299a136e2ca22e64e7970fbd640dd48"
+content-hash = "e46e42758a8027ceb6cf986cc7d1edd345a80ed26070a1e79eac1237518966c9"
 
 [metadata.files]
 alabaster = [

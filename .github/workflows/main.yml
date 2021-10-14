@@ -29,18 +29,21 @@ jobs:
       #----------------------------------------------
       #       Check-out repository project
       #----------------------------------------------
+      # https://github.com/actions/checkout
       - name: Checkout repository project
         uses: actions/checkout@v2
 
       #----------------------------------------------
       #       Set-up python
       #----------------------------------------------
+      # https://github.com/actions/setup-python
       - name: Get Python
         uses: actions/setup-python@v2
 
       #----------------------------------------------
       #  -----  install & configure poetry  -----
       #----------------------------------------------
+      # https://github.com/snok/install-poetry
       - name: Install Poetry
         uses: snok/install-poetry@v1
 

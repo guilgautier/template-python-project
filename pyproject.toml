@@ -23,7 +23,7 @@ classifiers = [
 packages = []
 
 # https://python-poetry.org/docs/pyproject/#include-and-exclude
-include = [] # ["data/**/*"]
+include = []
 exclude = []
 
 [tool.poetry.dependencies] # https://python-poetry.org/docs/cli/#add
@@ -54,6 +54,7 @@ sphinx-autobuild = { version = "^2021.3.14", optional = true }
 # https://github.com/mcmtroffaes/sphinxcontrib-bibtex
 sphinxcontrib-bibtex = { version = "^2.3.0", optional = true }
 # Checks syntax of reStructuredText and code blocks nested within it https://github.com/myint/rstcheck
+rstcheck = { version = "^3.3.1", optional = true }
 
 [tool.poetry.extras]
 # poetry install -E notebook -E docs

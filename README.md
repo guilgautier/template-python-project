@@ -9,30 +9,39 @@
   - [Development environment](#development-environment)
     - [WARNING for conda users](#warning-for-conda-users)
     - [IDE: Visual Studio Code](#ide-visual-studio-code)
-    - [Install Poetry](#install-poetry)
+    - [Install `poetry`](#install-poetry)
     - [Manage Python versions](#manage-python-versions)
     - [Virtual environment](#virtual-environment)
       - [Note](#note)
+      - [Running your classical commands in a poetry virtual environment](#running-your-classical-commands-in-a-poetry-virtual-environment)
   - [Dependency management](#dependency-management)
+    - [Define main (non-optional) dependencies](#define-main-non-optional-dependencies)
+    - [Define optional dependencies](#define-optional-dependencies)
+    - [Define extra dependencies](#define-extra-dependencies)
+    - [Define development dependencies](#define-development-dependencies)
   - [Installation](#installation)
-    - [Install as a dependency](#install-as-a-dependency)
-    - [Install from source and potentially contribute to the project](#install-from-source-and-potentially-contribute-to-the-project)
-    - [Install extras dependencies](#install-extras-dependencies)
+    - [Install the package as a dependency](#install-the-package-as-a-dependency)
+    - [Install in editable mode and potentially contribute to the project](#install-in-editable-mode-and-potentially-contribute-to-the-project)
+      - [Editable install using `poetry`](#editable-install-using-poetry)
+        - [Install extras dependencies](#install-extras-dependencies)
+      - [Editable install using `pip`](#editable-install-using-pip)
   - [Testing](#testing)
     - [Run tests using VSCode](#run-tests-using-vscode)
-  - [Debugging](#debugging)
+  - [Debugging files and tests using VSCode](#debugging-files-and-tests-using-vscode)
   - [Documentation](#documentation)
     - [Install documentation dependencies](#install-documentation-dependencies)
     - [Configure the documentation](#configure-the-documentation)
     - [Generate the documentation](#generate-the-documentation)
     - [Publish the documentation](#publish-the-documentation)
   - [Packaging and publishing](#packaging-and-publishing)
+    - [Build the package](#build-the-package)
+    - [Publish the package on a Package Index (PI)](#publish-the-package-on-a-package-index-pi)
   - [Continuous integration](#continuous-integration)
     - [Test installation of the package and run tests](#test-installation-of-the-package-and-run-tests)
     - [Code coverage with Codecov](#code-coverage-with-codecov)
   - [Miscellaneous](#miscellaneous)
 
-This repository may serve as a template for scientific projects developed in [Python](https://www.python.org/) using [Poetry](https://python-poetry.org/).
+This repository may serve as a template for scientific projects developed in [Python](https://www.python.org/) using [`poetry`](https://python-poetry.org/).
 
 ## Development environment
 
@@ -61,14 +70,14 @@ You can place it at the root of your project workspace.
 
 See also the [vscode-workflow](https://github.com/guilgautier/vscode-workflow) repository.
 
-### Install Poetry
+### Install `poetry`
 
-> [Poetry](https://python-poetry.org/) Python Packaging And Dependency Management Made Easy
+> [`poetry`](https://python-poetry.org/) Python Packaging And Dependency Management Made Easy
 
-Poetry is recommended for its simplicity to manage your Python project in many ways and make it meet the Python packaging standards.
+`poetry` is recommended for its simplicity to manage Python projects in many ways and make them meet the Python packaging standards.
 
 1. Read [WARNING for conda users](#warning-for-conda-users),
-2. See [Poetry's installation instructions](https://python-poetry.org/docs/#installation),
+2. See [`poetry`'s installation instructions](https://python-poetry.org/docs/#installation),
 3. Check your `poetry` version
 
     ```bash
@@ -79,7 +88,7 @@ If you get an error, please check [python-poetry/poetry/issues/507](https://gith
 
 ### Manage Python versions
 
-As mentioned on [Poetry's documentation](https://python-poetry.org/docs/managing-environments/)
+As mentioned on [`poetry`'s documentation](https://python-poetry.org/docs/managing-environments/)
 
 > To easily switch between Python versions, it is recommended to use [`pyenv`](https://github.com/pyenv/) or similar tools.
 >
@@ -100,133 +109,144 @@ See also the [Real Python's tutorial "Intro to `pyenv`"](https://realpython.com/
 
 It is always good practice to work in a virtual environment, isolated from your other Python projects.
 
-With [Poetry](https://python-poetry.org/) creating/activating a virtual environment is fairly simple (please read [WARNING for conda users](#warning-for-conda-users))
+With [`poetry`](https://python-poetry.org/) creating/activating a virtual environment is fairly simple, see also the
+
+(please read [WARNING for conda users](#warning-for-conda-users))
 
 ```bash
 # conda deactivate for conda users
-poetry shell  # a (.venv) flag should appear
+poetry shell  # the (virtual-environment-name) flag should appear
 ```
 
-To make sure your classical commands are executed in the virtual environment, e.g., `pytest`, prepend `poetry run ...`
+#### Note
 
-See also
+In this template project, as defined in the [poetry.toml](./poetry.toml) file, running `poetry shell` will create a new/activate the virtual environment named `(.venv)` at the root of the project in a `.venv` folder.
+See also [`poetry`'s documentation](https://python-poetry.org/docs/configuration#virtualenvscreate).
+
+If you [don’t want `poetry` to manage my virtual environments. Can I disable it?](https://python-poetry.org/docs/faq/#i-dont-want-poetry-to-manage-my-virtual-environments-can-i-disable-it)
+
+#### Running your classical commands in a poetry virtual environment
+
+[Prepend `poetry run`](https://python-poetry.org/docs/basic-usage/#using-poetry-run) to your classical commands (e.g. `poetry run pytest`) to make sure they are executed in the virtual environment.
+
+See examples in the following sections
 
 - [Testing](#testing),
 - [Documentation](#generate-the-documentation).
 
-#### Note
-
-In this template project, a virtual environment will be created at the root of the project in a `.venv` folder, as defined in the [poetry.toml](./poetry.toml) file, see also [Poetry's documentation](https://python-poetry.org/docs/configuration#virtualenvscreate).
-
-If you [don’t want `poetry` to manage my virtual environments. Can I disable it?](https://python-poetry.org/docs/faq/#i-dont-want-poetry-to-manage-my-virtual-environments-can-i-disable-it)
-
 ## Dependency management
 
-[Poetry](https://python-poetry.org/) is recommended for its dependency management capabilities.
-On top of installing a given package (like `pip` can do), Poetry also resolves dependencies' version to preserve compatibility.
+[`poetry`](https://python-poetry.org/) is recommended for its dependency management capabilities.
 
-Dependencies specified in the [`pyproject.toml`](./pyproject.toml) (according to [PEP 518](https://www.python.org/dev/peps/pep-0518/#file-format)) can be declared in the following way.
+On top of installing a given dependency (like `pip` would do), `poetry` also [resolves dependencies' version](https://python-poetry.org/docs/basic-usage/#installing-dependencies) (like `conda` would do, but faster).
+The result of the resolution procedure is stored in the [`poetry.lock`](./poetry.lock) file.
 
-- Install main (non-optional) dependencies
+[`poetry`](https://python-poetry.org/docs/pyproject/) makes use of the [`pyproject.toml`](./pyproject.toml) file to define and manage your project (metadata, dependencies, etc.).
+Note that, in a near future, see, e.g., [PEP 621](https://www.python.org/dev/peps/pep-0621/), the [`pyproject.toml`](./pyproject.toml) file is meant to replace `setup.py`, `setup.cfg`, etc.
 
-  See `[tool.poetry.dependencies]` in [`pyproject.toml`](./pyproject.toml)
+### Define main (non-optional) dependencies
 
-  ```bash
-  poetry add numpy
-  # poetry add "packagename[extra1,extra2]"
-  poetry remove numpy
-  ```
+See [`[tool.poetry.dependencies]`](https://python-poetry.org/docs/pyproject#dependencies-and-dev-dependencies) in [`pyproject.toml`](./pyproject.toml)
 
-- Install optional dependencies
+```bash
+poetry add numpy
+# poetry add "packagename[extra1,extra2]"
+poetry remove numpy
+```
 
-  See `[tool.poetry.dependencies]` in [`pyproject.toml`](./pyproject.toml)
+### Define optional dependencies
 
-  ```bash
-  poetry add jupyter --optional
-  # poetry add "packagename[extra1,extra2]" --optional
-  poetry remove jupyter
-  ```
+See [`[tool.poetry.dependencies]`](https://python-poetry.org/docs/pyproject#dependencies-and-dev-dependencies) in [`pyproject.toml`](./pyproject.toml)
 
-  Optional dependencies can then be combined to define package [extra dependencies](#install-extras-dependencies).
+```bash
+poetry add jupyter --optional
+# poetry add "packagename[extra1,extra2]" --optional
+poetry remove jupyter
+```
 
-- Install development dependencies
+### Define extra dependencies
 
-  See `[tool.poetry.dev-dependencies]` in [`pyproject.toml`](./pyproject.toml)
+See [`[tool.poetry.extras]`](https://python-poetry.org/docs/pyproject#extras) in [`pyproject.toml`](./pyproject.toml).
 
-  ```bash
-  poetry add black --dev
-  # poetry add "packagename[extra1,extra2]" --dev
-  poetry remove black --dev
-  ```
+[Optional dependencies](#install-optional-dependencies) can be combined to define package extra dependencies.
+
+### Define development dependencies
+
+See [`[tool.poetry.dev-dependencies]`](https://python-poetry.org/docs/pyproject#dependencies-and-dev-dependencies) in [`pyproject.toml`](./pyproject.toml)
+
+```bash
+poetry add black --dev
+# poetry add "packagename[extra1,extra2]" --dev
+poetry remove black --dev
+```
 
 ## Installation
 
-### Install as a dependency
+### Install the package as a dependency
 
 - If your project is already available on [PyPI](https://pypi.org/),
 
-  ```bash
-  poetry add packagename
-  # equivalent to pip install packagename
-  poetry add "packagename[extra1,extra2]"
-  # equivalent to pip install "packagename[extra1,extra2]"
-  ```
+    ```bash
+    poetry add packagename
+    # pip install packagename
+    poetry add "packagename[extra1,extra2]"
+    # pip install "packagename[extra1,extra2]"
+    ```
 
 - Otherwise, install the latest version from source (which might be broken)
 
   ```bash
-  poetry add git+<https://github.com/USERNAME/REPOSITORY_NAME.git>
-  # pip install git+<https://github.com/USERNAME/REPOSITORY_NAME.git>
+  poetry add git+https://github.com/USERNAME/REPOSITORY_NAME.git
+  # pip install git+https://github.com/USERNAME/REPOSITORY_NAME.git
   ```
 
-### Install from source and potentially contribute to the project
+> [To depend on a library located in a local directory or file, you can use the path property](https://python-poetry.org/docs/dependency-specification/#path-dependencies)
 
-- with [Poetry](https://python-poetry.org/)
+### Install in editable mode and potentially contribute to the project
 
-  The package can be installed in **editable** mode along with
+#### Editable install using `poetry`
 
-  - main (non-optional) dependencies, see tool.poetry.dependencies in [`pyproject.toml`](./pyproject.toml)
-  - dev dependencies, `[tool.poetry.dev-dependencies]` in [`pyproject.toml`](./pyproject.toml)
+Your package can be installed in **editable** mode along with
 
-  ```bash
-  git clone https://github.com/USERNAME/REPOSITORY_NAME.git
-  cd packagename
+- main (non-optional) dependencies, see `[tool.poetry.dependencies]` in [`pyproject.toml`](./pyproject.toml)
+- development dependencies, `[tool.poetry.dev-dependencies]` in [`pyproject.toml`](./pyproject.toml)
 
-  poetry shell  # create/activate local .venv (see poetry.toml)
-  poetry install  # install package in editable mode with main (non-optional) dependencies and dev dependencies (see pyproject.toml)
-  # poetry install --extras "name1 name2"  # install extra dependencies (see [tool.poetry.extras] in  pyproject.toml)
-  ```
+```bash
+git clone https://github.com/USERNAME/REPOSITORY_NAME.git
+cd REPOSITORY_NAME
+# activate your virtual environment or run
+# poetry shell  # to create/activate local .venv (see poetry.toml)
+poetry install
+# poetry install --no-dev  # to avoid installing the development dependencies
+```
 
-- with pip
+##### Install extras dependencies
 
-  Note that, from the current [`pyproject.toml`](./pyproject.toml) file, it is **not** possible to install the project in editable mode ~~`pip install -e .`~~.
-  Please consider installing with Poetry instead.
-
-  ```bash
-  git clone https://github.com/USERNAME/REPOSITORY_NAME.git
-  cd packagename
-  # activate your virtual environment
-  pip install .  # install package with main (non-optional) dependencies (see pyproject.toml)
-  # dev dependencies are not installed
-  # pip install ".[docs, notebook]"  # install extra documentation and jupyter notebook dependencies (see pyproject.toml)
-  ```
-
-### Install extras dependencies
+To install dependencies [defined as extra dependencies](#define-extra-dependencies) in the `[tool.poetry.extras]` section of the [`pyproject.toml`](./pyproject.toml), simply run
 
 ```bash
 poetry install --extras "name1 name2"
+# poetry install -E name1 -E name2
 ```
+
+See also [`poetry`'s documentation](https://python-poetry.org/docs/pyproject/#extras).
+
+#### Editable install using `pip`
+
+For now, packages defined only by a [`pyproject.toml`](./pyproject.toml) file **can't be installed in editable mode using classical tools** like setuptools,
+
+- ~~`pip install -e .`~~ won't work (at least for now).
+
+Please consider installing the package using `poetry` instead.
 
 See also
 
-- `[tool.poetry.extras]` in [`pyproject.toml`](./pyproject.toml),
-- [Poetry's documentation](https://python-poetry.org/docs/pyproject/#extras).
+- [PEP 660](https://www.python.org/dev/peps/pep-0660/)
+- <https://github.com/For-a-few-DPPs-more/spatstat-interface/blob/main/README.md#using-pip> for a potential alternative.
 
 ## Testing
 
 > The [`pytest`](https://docs.pytest.org/en/6.2.x/) framework makes it easy to write small tests, yet scales to support complex functional testing.
-
-**Note:** In this project `pytest` and `pytest-cov` are listed as development dependencies, and installed as such when `poetry install` was run.
 
 The unit tests of the package are declared in [`tests/test_*.py`](./tests/) files as `test_*` functions with a simple `assert` statement.
 
@@ -238,18 +258,21 @@ Run the package test suite with
 poetry run pytest  # -vv --cov=packagename --cov-report=xml
 ```
 
+**Note:** In this project [`pytest`](https://docs.pytest.org/en/stable/contents.html) and [`pytest-cov`](https://pytest-cov.readthedocs.io/en/latest/) are listed as `[tool.poetry.dev-dependencies]` in [`pyproject.toml`](./pyproject.toml).
+These dev-dependencies are installed as such when `poetry install` was run.
+
 ### Run tests using VSCode
 
 See the [Testing](https://code.visualstudio.com/docs/python/testing) section of the VSCode documentation.
 
-## Debugging
+## Debugging files and tests using VSCode
 
 The configuration file [.vscode/launch.json](.vscode/launch.json) contains two configurations for debugging
 
-1. Python generic
-2. Python test files
+1. Python generic files
+2. Python unit-test files
 
-For more details, check out the documentation
+For more details, see the VSCode documentation
 
 - [Debugging](https://code.visualstudio.com/docs/python/debugging),
 - [Debug Tests](https://code.visualstudio.com/docs/python/testing#_debug-tests).
@@ -260,7 +283,7 @@ For more details, check out the documentation
 
 Sphinx is in charge of building the documentation and generating HTML output, but also PDF, epub, ...
 
-The source files of the documentation are simply  `.rst` (reStructuredText) or `.md` (Markdown) files. However we suggest using reST markup to keep the same syntax and format as used for writing [Python docstings](https://devguide.python.org/documenting/).
+The source files of the documentation are simply  `.rst` (reStructuredText) or `.md` (Markdown) files. However we suggest using the reST markup to keep the same syntax and format as used for writing [Python docstings](https://devguide.python.org/documenting/).
 
 ### Install documentation dependencies
 
@@ -323,23 +346,27 @@ To generate the documentation locally, i.e., on your machine, you can either use
 
 After [linking your project with Read the Docs](https://docs.readthedocs.io/en/stable/intro/import-guide.html), you can configure Read the Docs to deploy the documentation of the package at <https://packagename.readthedocs.io/>, automatically or manually.
 
+See also the [`.readthedocs.yaml`](./.readthedocs.yaml) file.
+
 ## Packaging and publishing
 
-[Poetry](https://python-poetry.org/) is also of great help to simplify the packaging process
+[`poetry`](https://python-poetry.org/) is also of great help to simplify the packaging process.
 
-- build your package
+### Build the package
 
-  ```bash
-  poetry build
-  ```
+<https://python-poetry.org/docs/libraries#packaging>
 
-- publish your package on a Package Index (PI)
+```bash
+poetry build
+```
 
-  - [TestPyPI](https://test.pypi.org/) it is good practice to first publish on TestPyPI and check the results before publishing on the official [PyPI](https://pypi.org/) (see next bullet)
+### Publish the package on a Package Index (PI)
 
-    - [Poetry documentation](https://python-poetry.org/docs/repositories/#adding-a-repository)
-    - [Poetry configure credentials](https://python-poetry.org/docs/repositories/#configuring-credentials)
-    - [TestPyPI token](https://test.pypi.org/help/#apitoken)
+- [TestPyPI](https://test.pypi.org/) it is good practice to first publish on TestPyPI and check the results before publishing on the official [PyPI](https://pypi.org/) (see next bullet)
+
+  - [`poetry` documentation](https://python-poetry.org/docs/repositories/#adding-a-repository)
+  - [`poetry` configure credentials](https://python-poetry.org/docs/repositories/#configuring-credentials)
+  - [TestPyPI token](https://test.pypi.org/help/#apitoken)
 
     ```bash
     poetry config repositories.testpypi https://test.pypi.org/legacy/
@@ -347,15 +374,33 @@ After [linking your project with Read the Docs](https://docs.readthedocs.io/en/s
     poetry publish -r testpypi
     ```
 
-  - [PyPI](https://pypi.org/) (default)
+  - Check the results <https://test.pypi.org/project/packagename/>
+  - Check [your package installation from TestPyPI](https://packaging.python.org/guides/using-testpypi/#using-testpypi-with-pip)
 
-    - [Poetry publish to PyPI](https://python-poetry.org/docs/libraries/#publishing-to-pypi)
-    - [Poetry configure credentials](https://python-poetry.org/docs/repositories/#configuring-credentials)
-    - [PyPI token](https://pypi.org/help/#apitoken)
+    ```bash
+    # create a new virtual environment and run
+    pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ packagename
+    ```
+
+- [PyPI](https://pypi.org/) is the official Python Package Index
+
+  > [By default, `poetry` is configured to use the PyPI repository, for package installation and publishing.is the default repository](https://python-poetry.org/docs/repositories/#using-the-pypi-repository)
+
+  - [`poetry` publish to PyPI](https://python-poetry.org/docs/libraries/#publishing-to-pypi)
+  - [`poetry` configure credentials](https://python-poetry.org/docs/repositories/#configuring-credentials)
+  - [PyPI token](https://pypi.org/help/#apitoken)
 
     ```bash
     poetry config pypi-token.pypi MY_TOKEN
     poetry publish
+    ```
+
+  - Check the results <https://pypi.org/project/packagename/>
+  - Check your package installation from PyPI
+
+    ```bash
+    # create a new virtual environment and run
+    pip install packagename
     ```
 
 ## Continuous integration
@@ -366,11 +411,15 @@ GitHub workflows declared as [`.github/workflows/*.yml`](./.github/workflows) fi
 
 ### Test installation of the package and run tests
 
-TODO
+See the corresponding sections in the
+[`.github/workflows/main.yml`](./.github/workflows/main.yml)
 
 ### Code coverage with Codecov
 
-TODO
+- See the corresponding section in the
+[`.github/workflows/main.yml`](./.github/workflows/main.yml)
+- [codecov](https://docs.codecov.com/docs/)
+- [codecov-action](https://github.com/codecov/codecov-action)
 
 ## Miscellaneous
 
