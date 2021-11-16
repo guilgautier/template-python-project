@@ -1,6 +1,6 @@
 # template-python-project
 
-[![CI](https://github.com/guilgautier/template-python-project/actions/workflows/main.yml/badge.svg)](https://github.com/guilgautier/template-python-project/actions/workflows/main.yml)
+[![CI](https://github.com/guilgautier/template-python-project/actions/workflows/ci.yml/badge.svg)](https://github.com/guilgautier/template-python-project/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/guilgautier/template-python-project/branch/main/graph/badge.svg?token=9O6RRKUA3S)](https://codecov.io/gh/guilgautier/template-python-project)
 <!-- [![Documentation Status](https://readthedocs.org/projects/template-python-project/badge/?version=latest)](https://template-python-project.readthedocs.io/en/latest/?badge=latest) -->
 [![docs-build](https://github.com/guilgautier/template-python-project/actions/workflows/docs.yml/badge.svg)](https://github.com/guilgautier/template-python-project/actions/workflows/docs.yml)
@@ -422,12 +422,12 @@ GitHub workflows declared as [`.github/workflows/*.yml`](./.github/workflows) fi
 ### Test installation of the package and run tests
 
 See the corresponding sections in the
-[`.github/workflows/main.yml`](./.github/workflows/main.yml)
+[`.github/workflows/ci.yml`](./.github/workflows/ci.yml)
 
 ### Code coverage with Codecov
 
 - See the corresponding section in the
-[`.github/workflows/main.yml`](./.github/workflows/main.yml)
+[`.github/workflows/ci.yml`](./.github/workflows/ci.yml)
 - [codecov](https://docs.codecov.com/docs/)
 - [codecov-action](https://github.com/codecov/codecov-action)
 

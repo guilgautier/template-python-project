@@ -12,5 +12,16 @@ def addition(x, y):
 
     Returns:
         number: :math:`x + y`
+
+    .. testcode::
+
+        from packagename.operations import addition
+
+        result = addition(1, 3)
+        print(result)
+
+    .. testoutput::
+
+        4
     """
     return x + y
