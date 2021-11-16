@@ -52,10 +52,10 @@ extensions = [
     "sphinx.ext.napoleon",  # Support for NumPy and Google style docstrings
     "sphinx.ext.todo",  # Support for todo items # .. todo:: directive
     "sphinx.ext.viewcode",  # Add links to highlighted source code
-    # Non-official Sphinx extensions
+    # Non-official Sphinx extensions need to be installed
     # https://github.com/sphinx-contrib/
     "sphinxcontrib.bibtex",  # Sphinx extension for BibTeX style citations
-    "sphinxcontrib.proof",  # Sphinx extension to typeset theorems, proofs
+    # "sphinxcontrib.proof",  # Sphinx extension to typeset theorems, proofs
     # Non-official Sphinx extension for matplotlib plots
     # https://matplotlib.org/stable/api/sphinxext_plot_directive_api.html?highlight=plot_directive#module-matplotlib.sphinxext.plot_directive
     "matplotlib.sphinxext.plot_directive",  # .. plot:: directive for plt.plot
