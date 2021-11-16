@@ -18,12 +18,12 @@ on:
       - main
     paths:
       - "src/**"
-      - "tests/**"
+      - "docs/**"
       - "pyproject.toml"
-      - "poetry.toml"
       - "poetry.lock"
+      - "poetry.toml"
       - "!**.md"
-      - "!.github/workflows/docs.yml"
+      - "!.github/workflows/ci.yml"
   pull_request:
     paths-ignore:
       - "**.md"
