@@ -1,0 +1,74 @@
+name: docs
+
+# If you wish to deploy your documentation using GitHub Pages at
+# your_user_or_organization_name.github.io/your_repository
+# Uncomment the last step named Deploy documentation to gh-pages branch
+# Save and commit your changes
+# Push your changes and then
+# Go to https://github.com/your_user_name/your_repository/settings/pages
+# Select branch: gh-pages
+# Select folder: /(root)
+
+# Alternatively you can use ReadTheDocs https://readthedocs.org/
+# see also the ../../.readthedocs.yaml file
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/**"
+      - "tests/**"
+      - "pyproject.toml"
+      - "poetry.toml"
+      - "poetry.lock"
+      - "!**.md"
+      - "!.github/workflows/docs.yml"
+  pull_request:
+    paths-ignore:
+      - "**.md"
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v2
+
+      - name: Install Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.9"
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+
+        # with:
+        #   virtualenvs-create: true
+        #   virtualenvs-in-project: true
+
+      - name: Load cached venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v2
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Install package with main (non-optional) and extra docs dependencies
+        # see [tool.poetry.dependencies] and [tool.poetry.extras]
+        # in pyproject.toml
+        run: poetry install -E docs
+
+      - name: Build docs with sphinx
+        run: poetry run sphinx-build -b html docs docs/_build/html
+
+      - name: Deploy documentation to gh-pages branch
+        uses: s0/git-publish-subdir-action@develop
+        env:
+          REPO: self
+          BRANCH: gh-pages
+          FOLDER: docs/_build/html
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

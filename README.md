@@ -1,8 +1,10 @@
 # template-python-project
 
-[![Documentation Status](https://readthedocs.org/projects/template-python-project/badge/?version=latest)](https://template-python-project.readthedocs.io/en/latest/?badge=latest)
 [![CI](https://github.com/guilgautier/template-python-project/actions/workflows/main.yml/badge.svg)](https://github.com/guilgautier/template-python-project/actions/workflows/main.yml)
 [![codecov](https://codecov.io/gh/guilgautier/template-python-project/branch/main/graph/badge.svg?token=9O6RRKUA3S)](https://codecov.io/gh/guilgautier/template-python-project)
+<!-- [![Documentation Status](https://readthedocs.org/projects/template-python-project/badge/?version=latest)](https://template-python-project.readthedocs.io/en/latest/?badge=latest) -->
+[![docs-build](https://github.com/guilgautier/template-python-project/actions/workflows/docs.yml/badge.svg)](https://github.com/guilgautier/template-python-project/actions/workflows/docs.yml)
+[![docs-page](https://img.shields.io/badge/docs-latest-blue)](https://guilgautier.github.io/template-python-project/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 - [template-python-project](#template-python-project)
@@ -31,8 +33,10 @@
   - [Documentation](#documentation)
     - [Install documentation dependencies](#install-documentation-dependencies)
     - [Configure the documentation](#configure-the-documentation)
-    - [Generate the documentation](#generate-the-documentation)
-    - [Publish the documentation](#publish-the-documentation)
+    - [Generate the documentation locally](#generate-the-documentation-locally)
+    - [Build and publish the documentation online](#build-and-publish-the-documentation-online)
+      - [GitHub pages](#github-pages)
+      - [Read the Docs](#read-the-docs)
   - [Packaging and publishing](#packaging-and-publishing)
     - [Build the package](#build-the-package)
     - [Publish the package on a Package Index (PI)](#publish-the-package-on-a-package-index-pi)
@@ -166,9 +170,9 @@ poetry remove jupyter
 
 ### Define extra dependencies
 
-See [`[tool.poetry.extras]`](https://python-poetry.org/docs/pyproject#extras) in [`pyproject.toml`](./pyproject.toml).
+[Optional dependencies](#define-optional-dependencies) can be combined to define package extra dependencies, see [`[tool.poetry.extras]`](https://python-poetry.org/docs/pyproject#extras) in [`pyproject.toml`](./pyproject.toml).
 
-[Optional dependencies](#install-optional-dependencies) can be combined to define package extra dependencies.
+See also [install extras dependencies](#install-extras-dependencies).
 
 ### Define development dependencies
 
@@ -255,7 +259,9 @@ The configuration of `pytest` is defined in the [`[tool.pytest.ini_options]` sec
 Run the package test suite with
 
 ```bash
-poetry run pytest  # -vv --cov=packagename --cov-report=xml
+# poetry shell  # to create/activate local .venv (see poetry.toml)
+# poetry install  # install main (non-optional) and development dependencies
+poetry run pytest
 ```
 
 **Note:** In this project [`pytest`](https://docs.pytest.org/en/stable/contents.html) and [`pytest-cov`](https://pytest-cov.readthedocs.io/en/latest/) are listed as `[tool.poetry.dev-dependencies]` in [`pyproject.toml`](./pyproject.toml).
@@ -290,6 +296,7 @@ The source files of the documentation are simply  `.rst` (reStructuredText) or `
 Install `docs` extras dependencies, see `[tool.poetry.extras]` in [`pyproject.toml`](./pyproject.toml)
 
   ```bash
+  poetry shell  # to create/activate local .venv (see poetry.toml)
   poetry install -E docs
   # poetry install --extras "docs"
   # pip install ".[docs]"
@@ -302,51 +309,54 @@ The configuration file is located at [`docs/conf.py`](./docs/conf.py).
 - Edit the metadata of the package defined in [`docs/conf.py`](./docs/conf.py),
 - See also the [sphinx documentation](https://www.sphinx-doc.org/en/master/usage/configuration.html)
 
-### Generate the documentation
+### Generate the documentation locally
 
-To generate the documentation locally, i.e., on your machine, you can either use
+To generate the documentation locally, i.e., on your machine,
 
-- basic command
+```bash
+# poetry shell  # to create/activate local .venv (see poetry.toml)
+# poetry install -E docs
+poetry run sphinx-build -b html docs docs/_build/html
+```
 
-  ```bash
-  poetry run sphinx-build -b html docs docs/_build/html
-  ```
+and navigate the documentation
 
-  and navigate the documentation
+```bash
+open docs/_build/html/index.html
+```
 
-  ```bash
-  open docs/_build/html/index.html
-  ```
+**Important:** Any change made in the source `.py` files or the [`docs/conf.py`](./docs/conf.py) file require rebuilding the documentation.
 
-- live reload command
+### Build and publish the documentation online
 
-  If you have successfully [installed documentation dependencies](#install-documentation-dependencies) then [`sphinx-autobuild`](https://github.com/executablebooks/sphinx-autobuild) should be available.
+Choose either
 
-  [`sphinx-autobuild`](https://github.com/executablebooks/sphinx-autobuild) generates the documentation and makes a live view available in your browser.
+- [GitHub pages](#github-pages) (default), or
+- [Read the Docs](#read-the-docs).
 
-  Changes made to `.rst` files will be reflected live in your favorite browser at <http://127.0.0.1:8000>.
+#### GitHub pages
 
-  ```bash
-  poetry run sphinx-autobuild docs docs/_build/html
-  ```
+The documentation can be built according to the GitHub workflow [.github/workflows/docs.yml](.github/workflows/docs.yml) and deployed from the `gh-pages` branch via GitHub pages at
+[https://your-username.github.io/template-python-project](https://guilgautier.github.io/template-python-project).
 
-  ```text
-  ....
-  build succeeded.
+To make this work automatically, follow the simple steps below (only once!)
 
-  The HTML pages are in docs/_build/html.
-  [sphinx-autobuild] Serving on http://127.0.0.1:8000
-  ```
+1. Push you latest changes
 
-**Important:** In both cases, any change made in the source `.py` files or the [`docs/conf.py`](./docs/conf.py) file require rebuilding the documentation.
+   - a `gh-pages` branch will be automatically created/updated.
 
-### Publish the documentation
+2. On your GitHub repository
+   - Go to Settings -> Pages -> Source
+     - select branch: `gh-pages`
+     - select folder: `/root`
+
+#### Read the Docs
 
 > [Read the Docs](https://readthedocs.org/) simplifies software documentation by automating building, versioning, and hosting of your docs for you.
 
-After [linking your project with Read the Docs](https://docs.readthedocs.io/en/stable/intro/import-guide.html), you can configure Read the Docs to deploy the documentation of the package at <https://packagename.readthedocs.io/>, automatically or manually.
+After [linking your project with Read the Docs](https://docs.readthedocs.io/en/stable/intro/import-guide.html), you can configure Read the Docs to build and deploy the documentation of the package at [https://repository-name.readthedocs.io/en/latest/](https://template-python-project.readthedocs.io/en/latest/), either automatically or manually.
 
-See also the [`.readthedocs.yaml`](./.readthedocs.yaml) file.
+See also the [`.readthedocs.yaml`](./.readthedocs.yaml) configuration file.
 
 ## Packaging and publishing
 

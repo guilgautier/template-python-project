@@ -1,5 +1,18 @@
-# Read the Docs configuration file
-# See https://docs.readthedocs.io/en/stable/config-file/v2.html for details
+# ReadTheDocs configuration file
+# see https://docs.readthedocs.io/en/stable/config-file/v2.html
+
+# If you wish to deploy your documentation using ReadTheDocs at
+# https://your_project_name.readthedocs.io/
+# Create a ReadTheDocs account using your GitHub profile
+# https://readthedocs.org/accounts/login/
+# This will make sure ReadTheDocs and GitHub are linked
+# https://docs.readthedocs.io/en/stable/connected-accounts.html
+# so that GitHub projects can be easily imported on ReadTheDocs
+# https://docs.readthedocs.io/en/stable/intro/import-guide.html
+# Once your project is imported, simply
+
+# Alternatively you can use GitHub Pages to deploy your documentation
+# see also the .github/workflows/docs.yml workflow file
 
 # Required
 version: 2
@@ -44,8 +57,8 @@ python:
   install:
     # - requirements: docs/requirements.txt
     - method: pip
+      # pip install .[docs] see [tool.poetry.extras] in pyproject.toml
       path: .
-      # pip install .[rtd] see [tool.poetry.extras] in pyproject.toml
       extra_requirements:
         - docs
     # - method: setuptools

@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.abspath(os.path.join("..", "src")))
 
 # -- Project information -----------------------------------------------------
 
-project = "packagename"
+project = "template-python-project"
 copyright = "2021, Guillaume Gautier"
 author = "Guillaume Gautier"
 
@@ -28,15 +28,39 @@ author = "Guillaume Gautier"
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
+
 extensions = [
-    "sphinx.ext.autodoc",
-    "sphinx.ext.doctest",
-    "sphinx.ext.mathjax",  # LaTeX math rendering
-    "sphinx.ext.napoleon",  # support google and numpy docstring style
-    "sphinx.ext.viewcode",
-    "sphinxcontrib.bibtex",  # Bibliography management
-    "matplotlib.sphinxext.plot_directive",  # Matplotlib plots rendering
+    # Official Sphinx extensions
+    # https://www.sphinx-doc.org/en/master/usage/extensions/index.html
+    "sphinx.ext.autodoc",  # Include documentation from docstrings
+    # "sphinx.ext.autosectionlabel",  # Allow reference sections using its title
+    # "sphinx.ext.autosummary",  # Generate autodoc summaries
+    # "sphinx.ext.coverage",  # Collect doc coverage stats
+    "sphinx.ext.doctest",  # Test snippets in the documentation
+    "sphinx.ext.duration",  # Measure durations of Sphinx processing
+    # "sphinx.ext.extlinks",  # Markup to shorten external links
+    "sphinx.ext.githubpages",  # Publish HTML docs in GitHub Pages
+    # "sphinx.ext.graphviz",  # Add Graphviz graphs
+    # "sphinx.ext.ifconfig",  # Include content based on configuration
+    # "sphinx.ext.imgconverter",  # A reference image converter using Imagemagick
+    # "sphinx.ext.inheritance_diagram",  # Include inheritance diagrams
+    # "sphinx.ext.intersphinx",  # Link to other projects’ documentation
+    # "sphinx.ext.linkcode",  # Add external links to source code
+    # "sphinx.ext.imgmath",  # Render math as images
+    "sphinx.ext.mathjax",  # Render math via JavaScript
+    # "sphinx.ext.jsmath",  # Render math via JavaScript
+    "sphinx.ext.napoleon",  # Support for NumPy and Google style docstrings
+    "sphinx.ext.todo",  # Support for todo items # .. todo:: directive
+    "sphinx.ext.viewcode",  # Add links to highlighted source code
+    # Non-official Sphinx extensions
+    # https://github.com/sphinx-contrib/
+    "sphinxcontrib.bibtex",  # Sphinx extension for BibTeX style citations
+    "sphinxcontrib.proof",  # Sphinx extension to typeset theorems, proofs
+    # Non-official Sphinx extension for matplotlib plots
+    # https://matplotlib.org/stable/api/sphinxext_plot_directive_api.html?highlight=plot_directive#module-matplotlib.sphinxext.plot_directive
+    "matplotlib.sphinxext.plot_directive",  # .. plot:: directive for plt.plot
 ]
+
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
