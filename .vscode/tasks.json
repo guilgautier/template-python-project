@@ -1,0 +1,57 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Python - Test with pytest",
+            "type": "shell",
+            "command": "poetry",
+            "args": [
+                "run",
+                "pytest"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Python documentation - Build",
+            "type": "shell",
+            "command": "poetry",
+            "args": [
+                "run",
+                "sphinx-build",
+                "-b",
+                "html",
+                "${workspaceFolder}/docs",
+                "${workspaceFolder}/docs/_build/html"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Python documentation - Open",
+            "command": "open ${workspaceFolder}/docs/_build/html/index.html",
+            "type": "shell",
+            "presentation": {
+                "reveal": "always"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
