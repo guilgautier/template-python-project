@@ -41,7 +41,7 @@
     // Terminal
     "terminal.integrated.inheritEnv": false,
     "terminal.integrated.defaultProfile.osx": "zsh",
-    "terminal.integrated.fontFamily": "Meslo LG L DZ for Powerline",
+    // "terminal.integrated.fontFamily": "Meslo LG L DZ for Powerline",
     "terminal.integrated.commandsToSkipShell": [
         "language-julia.interrupt"
     ],
