@@ -41,6 +41,7 @@ python = ">=3.8,<3.10" # <3.10 required by scipy
 numpy = "^1.20.2"
 scipy = "^1.6.2"
 matplotlib = "^3.4.1"
+pandas = "^1.3.4"
 
 # A list of all of the optional dependencies, some of which are included in the
 # below `extras`. They can be opted into by apps.
@@ -58,6 +59,7 @@ Sphinx = { version = "^4.0.3", optional = true }
 sphinxcontrib-bibtex = { version = "^2.3.0", optional = true }
 # Checks syntax of reStructuredText and code blocks nested within it https://github.com/myint/rstcheck
 rstcheck = { version = "^3.3.1", optional = true }
+
 
 [tool.poetry.extras]
 # poetry install -E notebook -E docs
@@ -98,6 +100,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
 # poetry run pytest
+# if your package contrains "-", say pkg-name, then --cov=pkg_name
 minversion = "6.0"
 addopts = "-ra -q -vv --cov=packagename --cov-report=term-missing --cov-report=xml"
 testpaths = ["tests"]
