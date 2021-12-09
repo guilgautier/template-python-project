@@ -7,6 +7,8 @@
 [![docs-page](https://img.shields.io/badge/docs-latest-blue)](https://guilgautier.github.io/template-python-project/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://github.com/guilgautier/template-python-project/blob/main/notebooks/)
+
 - [template-python-project](#template-python-project)
   - [Development environment](#development-environment)
     - [WARNING for conda users](#warning-for-conda-users)
@@ -40,6 +42,8 @@
   - [Packaging and publishing](#packaging-and-publishing)
     - [Build the package](#build-the-package)
     - [Publish the package on a Package Index (PI)](#publish-the-package-on-a-package-index-pi)
+      - [TestPyPI](#testpypi)
+      - [PyPI](#pypi)
   - [Continuous integration](#continuous-integration)
     - [Test installation of the package and run tests](#test-installation-of-the-package-and-run-tests)
     - [Code coverage with Codecov](#code-coverage-with-codecov)
@@ -372,46 +376,50 @@ poetry build
 
 ### Publish the package on a Package Index (PI)
 
-- [TestPyPI](https://test.pypi.org/) it is good practice to first publish on TestPyPI and check the results before publishing on the official [PyPI](https://pypi.org/) (see next bullet)
+#### TestPyPI
 
-  - [`poetry` documentation](https://python-poetry.org/docs/repositories/#adding-a-repository)
-  - [`poetry` configure credentials](https://python-poetry.org/docs/repositories/#configuring-credentials)
-  - [TestPyPI token](https://test.pypi.org/help/#apitoken)
+It is good practice to first publish on [TestPyPI](https://test.pypi.org/) and check the results before publishing on the official [PyPI](https://pypi.org/), see [PyPI](#pypi) section.
 
-    ```bash
-    poetry config repositories.testpypi https://test.pypi.org/legacy/
-    poetry config http-basic.testpypi __token__ MY_TOKEN
-    poetry publish -r testpypi
-    ```
+- [`poetry` documentation](https://python-poetry.org/docs/repositories/#adding-a-repository)
+- [`poetry` configure credentials](https://python-poetry.org/docs/repositories/#configuring-credentials)
+- [TestPyPI token](https://test.pypi.org/help/#apitoken)
 
-  - Check the results <https://test.pypi.org/project/packagename/>
-  - Check [your package installation from TestPyPI](https://packaging.python.org/guides/using-testpypi/#using-testpypi-with-pip)
+ ```bash
+ poetry config repositories.testpypi https://test.pypi.org/legacy/
+ poetry config http-basic.testpypi __token__ MY_TOKEN
+ poetry publish -r testpypi
+ ```
 
-    ```bash
-    # create a new virtual environment and run
-    pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ packagename
-    ```
+- Check the results <https://test.pypi.org/project/packagename/>
+- Check [your package installation from TestPyPI](https://packaging.python.org/guides/using-testpypi/#using-testpypi-with-pip)
 
-- [PyPI](https://pypi.org/) is the official Python Package Index
+ ```bash
+ # create a new virtual environment and run
+ pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ packagename
+ ```
 
-  > [By default, `poetry` is configured to use the PyPI repository, for package installation and publishing.is the default repository](https://python-poetry.org/docs/repositories/#using-the-pypi-repository)
+#### PyPI
 
-  - [`poetry` publish to PyPI](https://python-poetry.org/docs/libraries/#publishing-to-pypi)
-  - [`poetry` configure credentials](https://python-poetry.org/docs/repositories/#configuring-credentials)
-  - [PyPI token](https://pypi.org/help/#apitoken)
+[PyPI](https://pypi.org/) is the official Python Package Index
 
-    ```bash
-    poetry config pypi-token.pypi MY_TOKEN
-    poetry publish
-    ```
+> [By default, `poetry` is configured to use the PyPI repository, for package installation and publishing.is the default repository](https://python-poetry.org/docs/repositories/#using-the-pypi-repository)
 
-  - Check the results <https://pypi.org/project/packagename/>
-  - Check your package installation from PyPI
+- [`poetry` publish to PyPI](https://python-poetry.org/docs/libraries/#publishing-to-pypi)
+- [`poetry` configure credentials](https://python-poetry.org/docs/repositories/#configuring-credentials)
+- [PyPI token](https://pypi.org/help/#apitoken)
 
-    ```bash
-    # create a new virtual environment and run
-    pip install packagename
-    ```
+  ```bash
+  poetry config pypi-token.pypi MY_TOKEN
+  poetry publish
+  ```
+
+- Check the results <https://pypi.org/project/packagename/>
+- Check your package installation from PyPI
+
+  ```bash
+  # create a new virtual environment and run
+  pip install packagename
+  ```
 
 ## Continuous integration
 
