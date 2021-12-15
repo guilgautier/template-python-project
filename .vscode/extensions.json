@@ -4,7 +4,7 @@
         // General extensions
         "VisualStudioExptTeam.vscodeintellicode",
         "christian-kohler.path-intellisense",
-        "CoenraadS.bracket-pair-colorizer-2",
+        // "CoenraadS.bracket-pair-colorizer-2",  # now native in VSCode
         "aaron-bond.better-comments",
         "streetsidesoftware.code-spell-checker",
         "streetsidesoftware.code-spell-checker-french",

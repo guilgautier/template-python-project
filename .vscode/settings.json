@@ -38,6 +38,9 @@
     "editor.tokenColorCustomizations": null,
     "editor.wordWrap": "bounded",
     "editor.quickSuggestions": true,
+    // native bracket pair colorization
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": "active",
     // Terminal
     "terminal.integrated.inheritEnv": false,
     "terminal.integrated.defaultProfile.osx": "zsh",
