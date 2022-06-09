@@ -23,7 +23,7 @@ repos:
       - id: isort
         # args: ["--profile", "black"] set up in pyproject.toml
   - repo: https://github.com/psf/black
-    rev: 21.11b1
+    rev: 22.3.0
     hooks:
       - id: black
   - repo: https://github.com/asottile/blacken-docs

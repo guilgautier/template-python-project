@@ -13,7 +13,7 @@
   - [Development environment](#development-environment)
     - [WARNING for conda users](#warning-for-conda-users)
     - [IDE: Visual Studio Code](#ide-visual-studio-code)
-    - [Install `poetry`](#install-poetry)
+    - [Project and dependency management](#project-and-dependency-management)
     - [Manage Python versions](#manage-python-versions)
     - [Virtual environment](#virtual-environment)
       - [Note](#note)
@@ -26,9 +26,9 @@
   - [Installation](#installation)
     - [Install the package as a dependency](#install-the-package-as-a-dependency)
     - [Install in editable mode and potentially contribute to the project](#install-in-editable-mode-and-potentially-contribute-to-the-project)
-      - [Editable install using `poetry`](#editable-install-using-poetry)
+      - [Editable install with `poetry`](#editable-install-with-poetry)
+      - [Editable install with `pip`](#editable-install-with-pip)
         - [Install extras dependencies](#install-extras-dependencies)
-      - [Editable install using `pip`](#editable-install-using-pip)
   - [Testing](#testing)
     - [Run tests using VSCode](#run-tests-using-vscode)
   - [Debugging files and tests using VSCode](#debugging-files-and-tests-using-vscode)
@@ -78,7 +78,7 @@ You can place it at the root of your project workspace.
 
 See also the [vscode-workflow](https://github.com/guilgautier/vscode-workflow) repository.
 
-### Install `poetry`
+### Project and dependency management
 
 > [`poetry`](https://python-poetry.org/) Python Packaging And Dependency Management Made Easy
 
@@ -210,9 +210,11 @@ poetry remove black --dev
 
 > [To depend on a library located in a local directory or file, you can use the path property](https://python-poetry.org/docs/dependency-specification/#path-dependencies)
 
+See also [`pip install`](https://pip.pypa.io/en/stable/cli/pip_install/) optional commands.
+
 ### Install in editable mode and potentially contribute to the project
 
-#### Editable install using `poetry`
+#### Editable install with `poetry`
 
 Your package can be installed in **editable** mode along with
 
@@ -224,33 +226,45 @@ git clone https://github.com/USERNAME/REPOSITORY_NAME.git
 cd REPOSITORY_NAME
 # activate your virtual environment or run
 # poetry shell  # to create/activate local .venv (see poetry.toml)
-poetry install
+poetry install  # main and dev dependencies are installed
 # poetry install --no-dev  # to avoid installing the development dependencies
 ```
 
-##### Install extras dependencies
+#### Editable install with `pip`
 
-To install dependencies [defined as extra dependencies](#define-extra-dependencies) in the `[tool.poetry.extras]` section of the [`pyproject.toml`](./pyproject.toml), simply run
+Your package can be installed in **editable** mode along with
+
+- main (non-optional) dependencies, see `[project] dependencies` in [`pyproject.toml`](./pyproject.toml)
+- development dependencies, `[project.optional-dependencies]` in [`pyproject.toml`](./pyproject.toml)
 
 ```bash
-poetry install --extras "name1 name2"
-# poetry install -E name1 -E name2
+git clone https://github.com/USERNAME/REPOSITORY_NAME.git
+cd REPOSITORY_NAME
+# activate your virtual environment and run
+pip install --editable .
+# pip install --editable ".[extra1, extras2]"  # to install extra dependencies
 ```
 
-See also [`poetry`'s documentation](https://python-poetry.org/docs/pyproject/#extras).
+See also [`pip install`](https://pip.pypa.io/en/stable/cli/pip_install/) optional commands.
 
-#### Editable install using `pip`
+##### Install extras dependencies
 
-For now, packages defined only by a [`pyproject.toml`](./pyproject.toml) file **can't be installed in editable mode using classical tools** like setuptools,
+- With `poetry`, dependencies [defined as extra dependencies](#define-extra-dependencies) in the `[tool.poetry.extras]` section of the [`pyproject.toml`](./pyproject.toml), simply run
 
-- ~~`pip install -e .`~~ won't work (at least for now).
+  ```bash
+  poetry install --extras "name1 name2"
+  # poetry install -E name1 -E name2
+  ```
 
-Please consider installing the package using `poetry` instead.
+  See also [`poetry`'s documentation](https://python-poetry.org/docs/pyproject/#extras).
 
-See also
+- With `pip`, dependencies [defined as extra dependencies](#define-extra-dependencies) in the `[project.optional-dependencies]` section of the [`pyproject.toml`](./pyproject.toml), simply run
 
-- [PEP 660](https://www.python.org/dev/peps/pep-0660/)
-- <https://github.com/For-a-few-DPPs-more/spatstat-interface/blob/main/README.md#using-pip> for a potential alternative.
+  ```bash
+  pip install --editable ".[extra1, extras2]"
+  ```
+
+  See also [`pip install`](https://pip.pypa.io/en/stable/cli/pip_install/) optional commands.
 
 ## Testing
 
@@ -374,6 +388,8 @@ See also the [`.readthedocs.yaml`](./.readthedocs.yaml) configuration file.
 poetry build
 ```
 
+See also [PyPA's `build` package](https://pypa-build.readthedocs.io/en/stable/).
+
 ### Publish the package on a Package Index (PI)
 
 #### TestPyPI
@@ -398,6 +414,8 @@ It is good practice to first publish on [TestPyPI](https://test.pypi.org/) and c
  pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ packagename
  ```
 
+See also [PyPA `twine` package](https://twine.readthedocs.io/en/latest/).
+
 #### PyPI
 
 [PyPI](https://pypi.org/) is the official Python Package Index
@@ -420,6 +438,8 @@ It is good practice to first publish on [TestPyPI](https://test.pypi.org/) and c
   # create a new virtual environment and run
   pip install packagename
   ```
+
+See also [PyPA `twine` package](https://twine.readthedocs.io/en/latest/).
 
 ## Continuous integration
 
