@@ -38,11 +38,11 @@ jobs:
     steps:
       # https://github.com/actions/checkout
       - name: Checkout project repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       # https://github.com/actions/setup-python
       - name: Install Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -56,7 +56,7 @@ jobs:
 
       - name: Load cached venv
         id: cached-poetry-dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: .venv
           key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
