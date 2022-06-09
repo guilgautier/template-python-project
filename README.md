@@ -237,13 +237,31 @@ Your package can be installed in **editable** mode along with
 - main (non-optional) dependencies, see `[project] dependencies` in [`pyproject.toml`](./pyproject.toml)
 - development dependencies, `[project.optional-dependencies]` in [`pyproject.toml`](./pyproject.toml)
 
-```bash
-git clone https://github.com/USERNAME/REPOSITORY_NAME.git
-cd REPOSITORY_NAME
-# activate your virtual environment and run
-pip install --editable .
-# pip install --editable ".[extra1, extras2]"  # to install extra dependencies
-```
+To do so,
+
+- Run
+
+  ```bash
+  git clone https://github.com/USERNAME/REPOSITORY_NAME.git
+  cd REPOSITORY_NAME
+  ```
+
+- Activate your virtual environment
+
+- Modify the `[build-system]` section in [`pyproject.toml`](./pyproject.toml) to
+
+  ```toml
+  [build-system]
+  requires = ["setuptools", "setuptools-scm"]
+  build-backend = "setuptools.build_meta"
+  ```
+
+- Finally, run
+
+  ```bash
+  pip install --editable .
+  # pip install --editable ".[extra1, extras2]"  # to install extra dependencies
+  ```
 
 See also [`pip install`](https://pip.pypa.io/en/stable/cli/pip_install/) optional commands.
 
@@ -261,7 +279,7 @@ See also [`pip install`](https://pip.pypa.io/en/stable/cli/pip_install/) optiona
 - With `pip`, dependencies [defined as extra dependencies](#define-extra-dependencies) in the `[project.optional-dependencies]` section of the [`pyproject.toml`](./pyproject.toml), simply run
 
   ```bash
-  pip install --editable ".[extra1, extras2]"
+  pip install ".[extra1, extras2]"
   ```
 
   See also [`pip install`](https://pip.pypa.io/en/stable/cli/pip_install/) optional commands.
