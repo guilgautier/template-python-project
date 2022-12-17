@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>API &#8212; template-python-project  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
@@ -13,7 +13,9 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -36,7 +38,7 @@
           <div class="body" role="main">
             
   <section id="module-packagename.operations">
-<span id="api"></span><h1>API<a class="headerlink" href="#module-packagename.operations" title="Permalink to this headline">¶</a></h1>
+<span id="api"></span><h1>API<a class="headerlink" href="#module-packagename.operations" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="packagename.operations.addition">
 <span class="sig-prename descclassname"><span class="pre">packagename.operations.</span></span><span class="sig-name descname"><span class="pre">addition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/packagename/operations.html#addition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#packagename.operations.addition" title="Permalink to this definition">¶</a></dt>
@@ -44,20 +46,20 @@
 <div class="math notranslate nohighlight" id="equation-eq-my-addition">
 <span class="eqno">(1)<a class="headerlink" href="#equation-eq-my-addition" title="Permalink to this equation">¶</a></span>\[x + y.\]</div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>x</strong> (<em>number</em>) – First number</p></li>
 <li><p><strong>y</strong> (<em>number</em>) – Second number</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><span class="math notranslate nohighlight">\(x + y\)</span></p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>number</p>
 </dd>
 </dl>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">packagename.operations</span> <span class="kn">import</span> <span class="n">addition</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">packagename.operations</span> <span class="kn">import</span> <span class="n">addition</span>
 
 <span class="n">result</span> <span class="o">=</span> <span class="n">addition</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
@@ -90,7 +92,10 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Feature 1: operations</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="definition.html">Section</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">API</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#packagename.operations.addition"><code class="docutils literal notranslate"><span class="pre">addition()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../bibliography/index.html">Bibliography</a></li>
@@ -116,7 +121,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -133,7 +138,7 @@
       &copy;2021, Guillaume Gautier.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
