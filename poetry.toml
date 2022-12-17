@@ -1,7 +1,9 @@
+# See https://python-poetry.org/docs/configuration
+
 [virtualenvs]
-# Create local virtualenv stored in .venv (Python version used depends on VSCode selected interpreter)
-# https://python-poetry.org/docs/configuration/#virtualenvsin-project
 # poetry config virtualenvs.create true --local
-# poetry config virtualenvs.in-project true --local
 create = true
+# poetry config virtualenvs.in-project true --local
 in-project = true
+# poetry config virtualenvs.prefer-active-python true --local
+prefer-active-python = true

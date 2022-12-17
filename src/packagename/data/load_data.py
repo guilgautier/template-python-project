@@ -1,13 +1,7 @@
 import pickle
-import sys
 from importlib import resources
 
 import pandas
-
-if sys.version_info < (3, 8):
-    import pickle5 as pickle
-else:
-    import pickle
 
 
 def load_mock_csv():

@@ -37,7 +37,11 @@
     "editor.tabSize": 4,
     "editor.tokenColorCustomizations": null,
     "editor.wordWrap": "bounded",
-    "editor.quickSuggestions": true,
+    "editor.quickSuggestions": {
+        "comments": "on",
+        "strings": "on",
+        "other": "on"
+    },
     // native bracket pair colorization
     "editor.bracketPairColorization.enabled": true,
     "editor.guides.bracketPairs": "active",
@@ -81,7 +85,11 @@
     // Markdown
     "[markdown]": {
         "editor.tabSize": 2,
-        "editor.quickSuggestions": true,
+        "editor.quickSuggestions": {
+            "comments": "on",
+            "strings": "on",
+            "other": "on"
+        },
     },
     // RestructuredText
     "esbonio.server.enabled": true,

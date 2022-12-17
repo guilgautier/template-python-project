@@ -32,7 +32,7 @@ jobs:
     strategy:
       matrix:
         os: ["ubuntu-latest", "macos-latest"]
-        python-version: ["3.7", "3.8", "3.9"]
+        python-version: ["3.8", "3.9"]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -42,7 +42,7 @@ jobs:
 
       # https://github.com/actions/setup-python
       - name: Install Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -61,14 +61,12 @@ jobs:
           path: .venv
           key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
 
-      - name: Install main (non-optional) and dev dependencies
-        # see [tool.poetry.dependencies] and [tool.poetry.dev-dependencies]
-        # in pyproject.toml
-        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-        run: poetry install --no-root
+      - name: Install main (mandatory) and development dependencies
+        # [tool.poetry.dependencies] [tool.poetry.group.dev.dependencies] in pyproject.toml
+        run: poetry install --only main,test
 
       - name: Install package
-        run: poetry install
+        run: poetry install --only-root
 
       - name: Test with pytest and create coverage report
         # Configuration of pytest [tool.pytest.ini_options] in pyproject.toml

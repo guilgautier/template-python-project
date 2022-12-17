@@ -1,84 +1,11 @@
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
-# To install with pip
-# pip install .
-# pip install -e .
-# comment (above) / uncomment (below) the fields "requires" and "build-backend" below
-# requires = ["setuptools", "setuptools-scm"]
-# build-backend = "setuptools.build_meta"
 
 # PEP 621 Storing project metadata in pyproject.toml
 # https://peps.python.org/pep-0621/
-[project]
-name = "packagename"
-version = "0.1.0"
-description = "Python project boilerplate"
-license = { file = "LICENSE" }
-authors = [
-    { email = "guillaume.gga@gmail.com" },
-    { name = "Guillaume Gautier" },
-]
-maintainers = [
-    { name = "Guillaume Gautier", email = "guillaume.gga@gmail.com" },
-]
-readme = "README.md"
-keywords = [
-    "python",
-    "packaging",
-    "python-package",
-    "template",
-] # ["optimization", "gradrient descent"] at most 5 keywords
-classifiers = [
-    "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Topic :: Software Development :: Libraries :: Python Modules",
-    "Topic :: Scientific/Engineering :: Mathematics",
-] # https://pypi.org/classifiers/
-
-requires-python = ">=3.7.1,<3.10" # >=3.7.1 required by pandas, <3.10 required by scipy
-
-# dependencies = ["dependency_name[extras] > 4.0.0"]
-dependencies = [
-    "numpy>=1.21.4",
-    "scipy>=1.7.3",
-    "matplotlib>=3.5.0",
-    "pandas>=1.3.4",
-    "pickle5 (>0.0) ; python_version >= '3.5' and python_version < '3.8'",
-]
-
-[project.optional-dependencies]
-# pip install ".[dev, notebook, docs]"
-# pip install "template-python-project[dev, notebook, docs]"
-dev = [
-    "pytest>=6.2.3",
-    "pytest-cov>=2.11.1",
-    "pre-commit>=2.15.0",
-    "black[jupyter]>=21.9b0",
-    "isort>=5.9.3",
-    "pydocstyle>=6.1.1",
-    "rstcheck>=3.3.1",
-    "pylint>=2.11.1",
-]
-notebook = ["jupyter>=1.0.0"]
-docs = [
-    "Sphinx>=4.0.3",
-    "sphinxcontrib-bibtex>=2.3.0",
-    "rstcheck>=3.3.1",
-    "esbonio>=0.10.1",
-]
-
-[project.urls]
-homepage = "https://github.com/guilgautier/template-python-project"      # url
-repository = "https://github.com/guilgautier/template-python-project"    # url
-documentation = "https://github.com/guilgautier/template-python-project" # url
-# changelog = "https://github.com/.../CHANGELOG.md" # url
-
-# Poetry
-[tool.poetry] # https://python-poetry.org/docs/pyproject/
+[tool.poetry]
+# https://python-poetry.org/docs/pyproject/
 name = "packagename"
 version = "0.1.0"
 description = "Python project boilerplate"
@@ -98,7 +25,6 @@ keywords = [
 classifiers = [
     "Intended Audience :: Science/Research",
     "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Topic :: Software Development :: Libraries :: Python Modules",
@@ -112,73 +38,81 @@ packages = []
 include = []
 exclude = [] # ["src/data/**/*"]
 
-[tool.poetry.dependencies] # https://python-poetry.org/docs/cli/#add
-# These packages are mandatory and form the core of this package’s distribution.
-python = ">=3.7.1,<3.10" # >=3.7.1 required by pandas, <3.10 required by scipy
+[tool.poetry.dependencies] # python-poetry.org/docs/managing-dependencies/
+# Mandatory dependencies of the project
+# Equivalent to [tool.poetry.group.main.dependencies]
+# `poetry install` is equivalent to poetry install --with main
 
-# Install latest version of dependency package-name using
-# poetry add package-name
-# specific the version
-numpy = "^1.21.4"
-scipy = "^1.7.3"
-matplotlib = "^3.5.0"
-pandas = "^1.3.4"
+python = ">=3.8,<3.10" # >=3.7.1 required by pandas, <3.10 required by scipy
 
-pickle5 = { version = ">0.0", python = ">=3.5,<3.8" }
+# To add a package to the main dependency group use
+# poetry add PACKAGENAME
+numpy = "^1.23.5"
+scipy = "^1.9.3"
+matplotlib = "^3.6.2"
+pandas = "^1.5.2"
 
-# A list of all of the optional dependencies, some of which are included in the
-# below `extras`. They can be opted into by apps.
-# poetry add package-name --optional
+# Organize dependencies by group
+# poetry add PACKAGENAME --group GROUPNAME
 
-# Jupyter notebooks within VSCode
-jupyter = { version = "^1.0.0", optional = true }
+[tool.poetry.group.test]
+optional = true # makes the `dev` dependency group optional
 
-# Documentation
-# configuration in docs/conf.py
-Sphinx = { version = "^4.0.3", optional = true }
-# Sphinx extensions https://www.sphinx-doc.org/en/master/usage/extensions/index.html
-# Manage bibliography .bib files
-# https://github.com/mcmtroffaes/sphinxcontrib-bibtex
-sphinxcontrib-bibtex = { version = "^2.3.0", optional = true }
-# Checks syntax of reStructuredText and code blocks nested within it https://github.com/myint/rstcheck
-rstcheck = { version = "^3.3.1", optional = true }
-esbonio = { version = "^0.10.1", optional = true }
+[tool.poetry.group.test.dependencies]
+pytest = "^7.2.0"
+pytest-cov = "^4.0.0" # generate coverage report see --cov --cov-report flags
 
-[tool.poetry.extras]
-# poetry install -E notebook -E docs
+[tool.poetry.group.dev]
+optional = true # makes the `dev` dependency group optional
+# poetry install --with dev
+# poetry install --only dev
 
-# Jupyter notebooks to be edited in VSCode
-notebook = ["jupyter"]
+[tool.poetry.group.dev.dependencies]
+# poetry add PACKAGENAME --group dev
+# Testing (same as group.test)
+pytest = "^7.2.0"
+pytest-cov = "^4.0.0" # generate coverage report see --cov --cov-report flags
+
+# Formatting, linting
+pre-commit = "^2.20.0" # https://pre-commit.com/
+black = { extras = [
+    "jupyter",
+], version = "^22.12.0" } # uncompromising formatter
+isort = "^5.11.2"
+pydocstyle = "^6.1.1"
+rstcheck = "^6.1.1"
+pylint = "^2.15.8"
+
+[tool.poetry.group.docs]
+optional = true # makes the `docs` dependency group optional
+# poetry install --with docs
+# poetry install --only docs
+
+[tool.poetry.group.docs.dependencies]
+# poetry add PACKAGENAME --group dev
 
 # Documentation is generated with Sphinx
 # https://www.sphinx-doc.org/en/master/index.html
-# - locally with poetry run sphinx-build -b docs docs/_build/html
+# - locally `poetry run sphinx-build -b docs docs/_build/html`
 # - online either with
-#     - ReadTheDocs see .readthedocs.yaml file
+#     - ReadTheDocs see .readthedocs.yaml file, or
 #     - GitHub pages see .github/workflows/docs.yml
-docs = ["Sphinx", "sphinxcontrib-bibtex", "rstcheck", "esbonio"]
+# Configuration file is docs/conf.py
 
-# Development dependencies
-# poetry install installs project in editable mode + dev-dependencies
-# poetry install --no-dev
-[tool.poetry.dev-dependencies]
-# poetry add package-name --dev
-# see [tool.pytest.ini_options]
-pytest = "^6.2.3"      # run the test suite
-pytest-cov = "^2.11.1" # generate coverage report see --cov --cov-report flags
+Sphinx = "^5.3.0"
+# Extensions https://www.sphinx-doc.org/en/master/usage/extensions/index.html
+sphinxcontrib-bibtex = "^2.5.0" # Manage bibliography .bib files
+rstcheck = "^6.1.1"
+esbonio = "^0.15.0"             # Language server for .rst files
 
-# https://pre-commit.com/
-pre-commit = "^2.15.0"
-# Python "uncompromising" code formatter https://github.com/psf/black
-black = { extras = ["jupyter"], version = "^21.9b0" }
-isort = "^5.9.3"
-pydocstyle = "^6.1.1"
-rstcheck = "^3.3.1"
-pylint = "^2.11.1"
+[tool.poetry.group.notebook]
+optional = true
+
+[tool.poetry.group.notebook.dependencies]
+jupyter = "^1.0.0"
 
 [tool.pytest.ini_options]
 # poetry run pytest
-# if your package contrains "-", say pkg-name, then --cov=pkg_name
 minversion = "6.0"
 addopts = "-ra -q -vv --cov=packagename --cov-report=term-missing --cov-report=xml"
 testpaths = ["tests"]
